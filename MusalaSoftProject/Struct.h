@@ -8,6 +8,7 @@ struct STUDENT
 {
 	string name;
 	string surname;
+	string password;
 	string classname;
 	string role;
 	string email;

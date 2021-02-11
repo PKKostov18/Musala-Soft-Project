@@ -1,0 +1,2 @@
+ilian,yanev,duner,10A,IMYanev18@codingburgas.bg,Front-end,0,
+plamen,kostov,duner2,10B,PKKostov18@codingburgas.bg,Scrum Master,1,
