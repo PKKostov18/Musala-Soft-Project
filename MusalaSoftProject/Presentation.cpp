@@ -86,9 +86,8 @@ void loginMenu()
     {
         system("cls");
 
-        while (result == "invalidAccount")
-        {
-            
+        //while (result == "invalidAccount")
+        //{
             cout << "                    +------------------------------------------------------+" << endl;
             cout << "                    |                                                      |" << endl;
             cout << "                    |                         Login                        |" << endl;
@@ -104,16 +103,24 @@ void loginMenu()
             cout << "                                     Enter your password: ";
             cin >> password.password;
             cout << endl;
-            result = checkAcc(username, password);
-        }
-
-        if (checkAcc(username, password) == "Please try to login again!") 
+           // result = checkAcc(username, password);
+       // }
+        
+        if (checkAcc(username, password) == "0") 
         {
-            loginMenu();
+            scrumMasterMenu();
         }
-        else
+        else if (checkAcc(username, password) == "1") 
         {
-           
+            frontEndMenu();
+        }
+        else if (checkAcc(username, password) == "3") 
+        {
+            backEndMenu();
+        }
+        else if (checkAcc(username, password) == "4") 
+        {
+            QAEMenu();
         }
 		cout << endl;
 
@@ -218,9 +225,242 @@ void registerMenu()
     
     if(role.role == "Scrum Master")
     {
+        id = 0;
+    }else if (role.role == "Front-end")
+    {
         id = 1;
+    }else if (role.role == "Back-end")
+    {
+        id = 2;
+    }else if (role.role == "QA engineer")
+    {
+        id = 3;
     }
 
     myFile << username.name << "," << username.surname << "," << password.password << ","  << classname.classname << "," << email.email << "," << role.role << "," << id << "," << endl;
     myFile.close();
+}
+
+void scrumMasterMenu()
+{
+    int teamChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                     SCRUM MASTER                     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    1. Create a team                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    2. Check your team                |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    3. Email to the admin             |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    4. Email your teammates           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    9. Back                           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; cin >> teamChoice;
+
+
+    switch (teamChoice)
+    {
+    case 1: ;
+        break;
+
+    case 2: ;
+        break;
+
+    case 3: ;
+        break;
+
+    case 4:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void frontEndMenu()
+{
+    int frontChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                       FRONT-END                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 1. Check your team                   |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 3. Check your inbox                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; cin >> frontChoice;
+
+
+    switch (frontChoice)
+    {
+    case 1:;
+        break;
+
+    case 2:;
+        break;
+
+    case 3:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void backEndMenu()
+{
+    int backChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                       BACK-END                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 1. Check your team                   |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 3. Check your inbox                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; cin >> backChoice;
+
+
+    switch (backChoice)
+    {
+    case 1:;
+        break;
+
+    case 2:;
+        break;
+
+    case 3:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void QAEMenu()
+{
+    int QAChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                      QA ENGINEER                     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 1. Check your team                   |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 3. Check your inbox                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; cin >> QAChoice;
+
+
+    switch (QAChoice)
+    {
+    case 1:;
+        break;
+
+    case 2:;
+        break;
+
+    case 3:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void QAEMenu()
+{
+    int emailChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                         Email                        |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |    Please, select which person you want to email:    |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 1. Back-end developer                |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Front-end developer               |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 3. QA engineer                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; cin >> emailChoice;
+
+
+    switch (emailChoice)
+    {
+    case 1:;
+        break;
+
+    case 2:;
+        break;
+
+    case 3:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
 }
