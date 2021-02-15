@@ -12,6 +12,7 @@ struct STUDENT
 	string classname;
 	string role;
 	string email;
+	string id;
 };
 
 struct TEAM

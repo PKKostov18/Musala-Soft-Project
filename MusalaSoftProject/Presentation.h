@@ -9,4 +9,7 @@ void registerMenu();
 void scrumMasterMenu();
 void frontEndMenu();
 void backEndMenu();
-void QAEMenu();
+void QAEngineerMenu();
+void emailMenu();
+void teacherMenu();
+void adminMenu();

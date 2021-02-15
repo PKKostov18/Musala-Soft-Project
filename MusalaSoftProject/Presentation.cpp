@@ -67,7 +67,7 @@ void mainMenu()
 
 void loginMenu()
 {
-    STUDENT username, password;
+    STUDENT username, password, id;
     string result = "invalidAccount";
     char choice;
     int choose;
@@ -103,27 +103,13 @@ void loginMenu()
             cout << "                                     Enter your password: ";
             cin >> password.password;
             cout << endl;
+
            // result = checkAcc(username, password);
        // }
-        
-        if (checkAcc(username, password) == "0") 
-        {
-            scrumMasterMenu();
-        }
-        else if (checkAcc(username, password) == "1") 
-        {
-            frontEndMenu();
-        }
-        else if (checkAcc(username, password) == "3") 
-        {
-            backEndMenu();
-        }
-        else if (checkAcc(username, password) == "4") 
-        {
-            QAEMenu();
-        }
-		cout << endl;
+     
+           // checkAccId(id, username);
 
+       
     }else
     {
         system("cls");
@@ -158,10 +144,9 @@ void loginMenu()
 
 void registerMenu()
 {
-    STUDENT username, password, surname, classname, email, role;
+    STUDENT username, password, surname, classname, email, role, id;
     string c_password;
     ofstream myFile;
-    int id = 0;
     myFile.open("students.txt", ios::app);
 
     system("cls");
@@ -225,19 +210,19 @@ void registerMenu()
     
     if(role.role == "Scrum Master")
     {
-        id = 0;
+        id.id = "0";
     }else if (role.role == "Front-end")
     {
-        id = 1;
+        id.id = "1";
     }else if (role.role == "Back-end")
     {
-        id = 2;
+        id.id = "2";
     }else if (role.role == "QA engineer")
     {
-        id = 3;
+        id.id = "3";
     }
 
-    myFile << username.name << "," << username.surname << "," << password.password << ","  << classname.classname << "," << email.email << "," << role.role << "," << id << "," << endl;
+    myFile << username.name << "," << username.surname << "," << password.password << ","  << classname.classname << "," << email.email << "," << role.role << "," << id.id << "," << endl;
     myFile.close();
 }
 
@@ -266,7 +251,24 @@ void scrumMasterMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; cin >> teamChoice;
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> teamChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> teamChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> teamChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> teamChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 
 
     switch (teamChoice)
@@ -313,7 +315,24 @@ void frontEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; cin >> frontChoice;
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> frontChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> frontChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (frontChoice != 1 && frontChoice != 2 && frontChoice != 3 && frontChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> frontChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> frontChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 
 
     switch (frontChoice)
@@ -357,7 +376,24 @@ void backEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; cin >> backChoice;
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> backChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> backChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (backChoice != 1 && backChoice != 2 && backChoice != 3 && backChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> backChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> backChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 
 
     switch (backChoice)
@@ -377,7 +413,7 @@ void backEndMenu()
     }
 }
 
-void QAEMenu()
+void QAEngineerMenu()
 {
     int QAChoice;
 
@@ -401,7 +437,24 @@ void QAEMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; cin >> QAChoice;
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> QAChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> QAChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (QAChoice != 1 && QAChoice != 2 && QAChoice != 3 && QAChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> QAChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> QAChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 
 
     switch (QAChoice)
@@ -421,13 +474,13 @@ void QAEMenu()
     }
 }
 
-void QAEMenu()
+void emailMenu()
 {
     int emailChoice;
 
     cout << "                    +------------------------------------------------------+" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                         Email                        |" << endl;
+    cout << "                    |                         EMAIL                        |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
     cout << "                    |                                                      |" << endl;
@@ -445,7 +498,24 @@ void QAEMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; cin >> emailChoice;
+    cout << "                                   Enter your selection: ";
+    while (!(cin >> emailChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> emailChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (emailChoice != 1 && emailChoice != 2 && emailChoice != 3 && emailChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> emailChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> emailChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 
 
     switch (emailChoice)
@@ -457,6 +527,115 @@ void QAEMenu()
         break;
 
     case 3:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void teacherMenu()
+{
+    int teacherChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                        TEACHER                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |               1. Check the teams you are in          |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |               9. Back                                |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> teacherChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> teacherChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (teacherChoice != 1 && teacherChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> teacherChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> teacherChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+
+    switch (teacherChoice)
+    {
+    case 1:;
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void adminMenu()
+{
+    int adminChoice;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                         ADMIN                        |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   1. Manage account                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   2. View info                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   3. Inbox                           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   9. Back                            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: "; 
+    while (!(cin >> adminChoice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> adminChoice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (adminChoice != 1 && adminChoice != 2 && adminChoice != 3 && adminChoice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> adminChoice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> adminChoice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+
+    switch (adminChoice)
+    {
+    case 1:;
+        break;
+
+    case 2:;
         break;
 
     case 9:

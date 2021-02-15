@@ -43,7 +43,57 @@ string checkAcc(STUDENT& username, STUDENT& password)
 	return "invalidAccount";
 }
 
-bool isCharacter(const char Character)
+string checkAccId(STUDENT id, STUDENT& username)
+{
+	ifstream myFile("students.txt");
+	string line[100];
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, line[0], ',');
+
+			if (line[0] == username.name)
+			{
+				getline(myFile, line[1], ',');
+
+				if (id.id == "0")
+				{
+					scrumMasterMenu();
+				}
+				else if (id.id == "1")
+				{
+					frontEndMenu();
+				}
+				else if (id.id == "2")
+				{
+					backEndMenu();
+				}
+				else if (id.id == "3")
+				{
+					QAEngineerMenu();
+				}
+				else if (id.id == "4")
+				{
+					teacherMenu();
+				}
+				else if (id.id == "5")
+				{
+					adminMenu();
+				}
+			}
+			else
+			{
+				getline(myFile, line[3]);
+			}
+		}
+		myFile.close();
+	}	
+	return "InvalidId";
+}
+
+bool isCharacter(const char character)
 {
 	return ((Character >= 'a' && Character <= 'z') || (Character >= 'A' && Character <= 'Z'));
 }
@@ -83,4 +133,53 @@ bool isClassnameValid(string& classname)
 		cout << endl;
 	}
 	return true;
+}
+
+int tokenize(string line, string* results, char delimiter) 
+{
+	string help;
+	int counter = 0, count = 0;
+
+	for (int i = 0; i < line.size(); i++)
+	{
+		if (line[i] == delimiter)
+		{
+			results[counter++] = help;
+			help = "";
+			i++;
+		}
+		help += line[i];
+	}
+	return counter;
+}
+
+void displayStudents()
+{
+	ifstream myFile("students.txt");
+	STUDENT students;
+	string line, tokens[7], help;
+
+	cout << "              Names:    Surnames:   Passowrds:     Class:     Emails:     Role:" << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+				cout << "  Account:    " << tokens[0] << "   " << tokens[1] << "   " << tokens[2] << "   " << tokens[3] << "   " << tokens[4] << "   " << tokens[5] << endl << endl;
+			}
+		}
+	}
 }
