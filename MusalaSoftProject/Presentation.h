@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #pragma once
@@ -10,6 +11,8 @@ void scrumMasterMenu();
 void frontEndMenu();
 void backEndMenu();
 void QAEngineerMenu();
-void emailMenu();
 void teacherMenu();
 void adminMenu();
+void viewMenu();
+void teamMenu();
+void teacherRegisterMenu();

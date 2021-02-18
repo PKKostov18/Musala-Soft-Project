@@ -6,32 +6,37 @@ using namespace std;
 
 struct STUDENT
 {
-	string name;
-	string surname;
-	string password;
-	string classname;
-	string role;
-	string email;
-	string id;
+	string name = "";
+	string surname = "";
+	string password = "";
+	string classname = "";
+	string role = "";
+	string email = "";
+	string id = "";
 };
 
 struct TEAM
 {
-	string name;
-	string description;
-	string email;
+	string name = "";
+	string description = "";
+	string date = "";
+	string teacher = "";
+	string teammatesBackend = "";
+	string teammatesFrontend = "";
+	string teammatesQA = "";
 };
 
 struct TEACHER
 {
-	string name;
-	string surname;
-	string email;
+	string name = "";
+	string surname = "";
+	string email = "";	
+	string id = "";
 };
 
 struct SCHOOL
 {
-	string name;
-	string town;
-	string address;
+	string name = "";
+	string town = "";
+	string address = "";
 };

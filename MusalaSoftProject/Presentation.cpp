@@ -108,7 +108,6 @@ void loginMenu()
        // }
      
            // checkAccId(id, username);
-
        
     }else
     {
@@ -245,9 +244,7 @@ void scrumMasterMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                    3. Email to the admin             |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                    4. Email your teammates           |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                    9. Back                           |" << endl;
+    cout << "                    |                    9. Log out                        |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
@@ -273,16 +270,13 @@ void scrumMasterMenu()
 
     switch (teamChoice)
     {
-    case 1: ;
+    case 1: teamMenu();
         break;
 
     case 2: ;
         break;
 
     case 3: ;
-        break;
-
-    case 4:;
         break;
 
     case 9:
@@ -307,11 +301,7 @@ void frontEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 3. Check your inbox                  |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
@@ -340,12 +330,6 @@ void frontEndMenu()
     case 1:;
         break;
 
-    case 2:;
-        break;
-
-    case 3:;
-        break;
-
     case 9:
         mainMenu();
         break;
@@ -368,11 +352,7 @@ void backEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 3. Check your inbox                  |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
@@ -401,12 +381,6 @@ void backEndMenu()
     case 1:;
         break;
 
-    case 2:;
-        break;
-
-    case 3:;
-        break;
-
     case 9:
         mainMenu();
         break;
@@ -429,11 +403,9 @@ void QAEngineerMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                 2. Email to the Scrum Master         |" << endl;
+    cout << "                    |                 2. Report bugs                       |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                 3. Check your inbox                  |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 9. Back                              |" << endl;
+    cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
@@ -463,70 +435,6 @@ void QAEngineerMenu()
         break;
 
     case 2:;
-        break;
-
-    case 3:;
-        break;
-
-    case 9:
-        mainMenu();
-        break;
-    }
-}
-
-void emailMenu()
-{
-    int emailChoice;
-
-    cout << "                    +------------------------------------------------------+" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                         EMAIL                        |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    +------------------------------------------------------+" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |    Please, select which person you want to email:    |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 1. Back-end developer                |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 2. Front-end developer               |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 3. QA engineer                       |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 9. Back                              |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    +------------------------------------------------------+" << endl;
-
-    cout << "                                   Enter your selection: ";
-    while (!(cin >> emailChoice))
-    {
-        cout << "\n                       Not an integer, try again: "; cin >> emailChoice;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    while (emailChoice != 1 && emailChoice != 2 && emailChoice != 3 && emailChoice != 9)
-    {
-        cout << "                       Invalid input, try again:";
-        while (!(cin >> emailChoice))
-        {
-            cout << "\n                          Not an integer, try again: "; cin >> emailChoice;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-    }
-
-
-    switch (emailChoice)
-    {
-    case 1:;
-        break;
-
-    case 2:;
-        break;
-
-    case 3:;
         break;
 
     case 9:
@@ -602,9 +510,11 @@ void adminMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                   1. Manage account                  |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   2. View info                       |" << endl;
+    cout << "                    |                   2. School                          |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                   3. Inbox                           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   4. Add teacher                     |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                   9. Back                            |" << endl;
     cout << "                    |                                                      |" << endl;
@@ -618,7 +528,7 @@ void adminMenu()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (adminChoice != 1 && adminChoice != 2 && adminChoice != 3 && adminChoice != 9)
+    while (adminChoice != 1 && adminChoice != 2 && adminChoice != 3 && adminChoice != 4 && adminChoice != 9)
     {
         cout << "                       Invalid input, try again:";
         while (!(cin >> adminChoice))
@@ -629,17 +539,191 @@ void adminMenu()
         }
     }
 
-
     switch (adminChoice)
     {
     case 1:;
         break;
 
-    case 2:;
+    case 2:
+        viewMenu();
+        break;
+
+    case 3:;
+        break;
+
+    case 4: 
+        teacherMenu();
         break;
 
     case 9:
         mainMenu();
         break;
     }
+}
+
+void viewMenu()
+{
+    int viewChoose;
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                         View                         |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |             Choose which you want to see:            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                1. List of all students               |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                2. List of all teachers               |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                3. List of all teams                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                4. See lists with particular creteria |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                9. Back                               |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "                                   Enter your selection: ";
+    while (!(cin >> viewChoose))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> viewChoose;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (viewChoose != 1 && viewChoose != 2 && viewChoose != 3 && viewChoose != 4 && viewChoose != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> viewChoose))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> viewChoose;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (viewChoose)
+    {
+    case 1:
+        displayStudents();
+        break;
+
+    case 2:;
+        break;
+
+    case 3:;
+        break;
+
+    case 4:
+        break;
+
+    case 9:
+        mainMenu();
+        break;
+    }
+}
+
+void teamMenu()
+{
+    TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA;
+    string choose;
+    ofstream myFile;
+    myFile.open("team.txt", ios::app);
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                     Create a team                    |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl; 
+
+    cout << "                                   Enter your the team name: ";
+    cin >> name.name;
+
+    cout << "                                   Write a description of the team: ";
+    cin >> description.description;
+
+    cout << "                                   Enter the date of set up: ";
+    cout << "                                   Example - 05.03.2020 - dd.mm.yyyy: ";
+    cin >> date.date;
+    cout << endl;
+
+    cout << "\n                           Choose to see who is free for your team: " << endl;
+    cout << "                                         1. Back-end" << endl;
+    cout << "                                         2. Front-end" << endl;
+    cout << "                                         3. QA engineer" << endl << endl;
+    cout << "                                        Type your choice: ";
+    getline(cin, choose);
+
+    while (choose != "Back-end" && choose != "Front-end" && choose != "QA engineer")
+    {
+        cout << "                         Invalid input, please try again: "; getline(cin, choose);
+        cin.clear();
+    }
+
+    vector<STUDENT> filter = displayParticularStudents(choose);
+
+    cout << "     Names:           Surnames:" << endl;
+    for (size_t i = 0; i < filter.size(); i++)
+    {
+        cout << filter[i].name << " " << filter[i].surname << endl;
+    }
+
+    if (choose == "Back-end")
+    {
+        cin >> studentBackend.teammatesBackend;
+    }
+    else if (choose == "Front-end")
+    {
+        cin >> studentFrontend.teammatesFrontend;
+    }
+    else if (choose == "QA engineer")
+    {
+        cin >> studentQA.teammatesQA;
+    }
+    
+    cout << "                                   Add a teacher to your team: ";
+    cin >> teacher.teacher;
+
+    myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << endl;
+    myFile.close();
+}
+
+void teacherRegisterMenu()
+{
+    TEACHER name, surname, date, email, id;
+    string choose;
+    ofstream myFile;
+    myFile.open("teachers.txt", ios::app);
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   Register a teacher                 |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl << endl;
+
+    cout << "                                         Name: ";
+    cin >> name.name;
+
+    cout << "                                         Surname: ";
+    cin >> surname.surname;
+
+    cout << "                                         Email: ";
+    cin >> email.email;
+
+    while (!isEmailValid(email.email.c_str()))
+    {
+        cout << "\n                           Invalid email, try again: "; cin >> email.email;
+    }
+    cout << endl;
+
+    id.id = "4";
+
+    myFile << name.name << "," << surname.surname << "," << email.email << "," << id.id << "," << endl;
+    myFile.close();
 }

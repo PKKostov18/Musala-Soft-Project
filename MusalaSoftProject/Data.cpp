@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include <regex>
 #include <fstream>
+#include <vector>
 #include "Data.h"
 #include "Presentation.h"
 #include "Struct.h"
@@ -95,7 +95,7 @@ string checkAccId(STUDENT id, STUDENT& username)
 
 bool isCharacter(const char character)
 {
-	return ((Character >= 'a' && Character <= 'z') || (Character >= 'A' && Character <= 'Z'));
+	return ((character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z'));
 }
 
 bool isEmailValid(const char* email)
@@ -157,6 +157,7 @@ void displayStudents()
 {
 	ifstream myFile("students.txt");
 	STUDENT students;
+	int choose;
 	string line, tokens[7], help;
 
 	cout << "              Names:    Surnames:   Passowrds:     Class:     Emails:     Role:" << endl << endl;
@@ -182,4 +183,44 @@ void displayStudents()
 			}
 		}
 	}
+
+	cout << "                              Type 1 to back: "; 
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1: viewMenu();
+		break;
+	}
+}
+
+vector<STUDENT> displayParticularStudents(string role)
+{
+	vector<STUDENT> result;
+	vector<STUDENT> student;
+
+	for (size_t i = 0; i < student.size(); i++)
+	{
+		if (student[i].role == role)
+		{
+			result.push_back(student[i]);
+		}	
+	}
+	return result;
 }
