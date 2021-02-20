@@ -1,0 +1,7 @@
+Velika,Gulemerova,vgyulemerova@codingburgas.bg,4,
+Viktor,Stoev,vstoev@codingburgas.bg,4,
+Petur,Georgiev,pgeogiev@codingburgas.bg,4,
+Danaila,Stamatova,dstamatova@codingburgas.bg,4,
+Mila,Nikolova,mnikolova@codingburgas.bg,4,
+Daniela,Kirova,dkirova@codingburgas.bg,4,
+Yordanka,Nikolova,ynikolova@codingburgas.bg,4,

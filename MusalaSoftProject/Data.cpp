@@ -43,7 +43,7 @@ string checkAcc(STUDENT& username, STUDENT& password)
 	return "invalidAccount";
 }
 
-string checkAccId(STUDENT id, STUDENT& username)
+string checkAccStudentsId(STUDENT id, STUDENT& username)
 {
 	ifstream myFile("students.txt");
 	string line[100];
@@ -74,14 +74,6 @@ string checkAccId(STUDENT id, STUDENT& username)
 				{
 					QAEngineerMenu();
 				}
-				else if (id.id == "4")
-				{
-					teacherMenu();
-				}
-				else if (id.id == "5")
-				{
-					adminMenu();
-				}
 			}
 			else
 			{
@@ -90,6 +82,36 @@ string checkAccId(STUDENT id, STUDENT& username)
 		}
 		myFile.close();
 	}	
+	return "InvalidId";
+}
+
+string checkAccTeachersId(STUDENT id, STUDENT& username)
+{
+	ifstream myFile("students.txt");
+	string line[100];
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, line[0], ',');
+
+			if (line[0] == username.name)
+			{
+				getline(myFile, line[1], ',');
+
+				if (id.id == "4")
+				{
+					scrumMasterMenu();
+				}
+			}
+			else
+			{
+				getline(myFile, line[3]);
+			}
+		}
+		myFile.close();
+	}
 	return "InvalidId";
 }
 
@@ -185,6 +207,63 @@ void displayStudents()
 	}
 
 	cout << "                              Type 1 to back: "; 
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1: viewMenu();
+		break;
+	}
+}
+
+void displayTeachers()
+{
+	ifstream myFile("teachers.txt");
+	STUDENT students;
+	int choose;
+	string line, tokens[7], help;
+
+	cout << "              Names:    Surnames:   Emails:" << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+				cout << "  Account:    " << tokens[0] << "   " << tokens[1] << "   " << tokens[2] << endl << endl;
+			}
+		}
+	}
+
+	cout << "                              Type 1 to back: ";
 	while (!(cin >> choose))
 	{
 		cout << "\n                        Not an integer, please try again: "; cin >> choose;

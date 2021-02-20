@@ -24,6 +24,7 @@ struct TEAM
 	string teammatesBackend = "";
 	string teammatesFrontend = "";
 	string teammatesQA = "";
+	string status = "";
 };
 
 struct TEACHER

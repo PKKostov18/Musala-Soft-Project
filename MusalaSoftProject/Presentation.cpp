@@ -33,7 +33,7 @@ void mainMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; 
+    cout << "\n                                   Enter your selection: "; 
     while (!(cin >> choice))
     {
         cout << "\n                       Not an integer, try again: "; cin >> choice;
@@ -104,10 +104,11 @@ void loginMenu()
             cin >> password.password;
             cout << endl;
 
-           // result = checkAcc(username, password);
-       // }
+            //result = checkAcc(username, password);
+        //}
      
-           // checkAccId(id, username);
+         //checkAccId(id, username);
+            viewMenu();
        
     }else
     {
@@ -565,6 +566,8 @@ void viewMenu()
 {
     int viewChoose;
 
+    system("cls");
+
     cout << "                    +------------------------------------------------------+" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                         View                         |" << endl;
@@ -607,10 +610,13 @@ void viewMenu()
     switch (viewChoose)
     {
     case 1:
+        system("cls");
         displayStudents();
         break;
 
-    case 2:;
+    case 2:
+        system("cls");
+        displayTeachers();
         break;
 
     case 3:;
@@ -710,10 +716,10 @@ void teacherRegisterMenu()
     cout << "                                         Name: ";
     cin >> name.name;
 
-    cout << "                                         Surname: ";
+    cout << "\n                                         Surname: ";
     cin >> surname.surname;
 
-    cout << "                                         Email: ";
+    cout << "\n                                         Email: ";
     cin >> email.email;
 
     while (!isEmailValid(email.email.c_str()))
