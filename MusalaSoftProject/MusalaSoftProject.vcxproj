@@ -151,6 +151,7 @@
   <ItemGroup>
     <Text Include="students.txt" />
     <Text Include="teachers.txt" />
+    <Text Include="team.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

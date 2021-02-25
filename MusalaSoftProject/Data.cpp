@@ -287,19 +287,188 @@ void displayTeachers()
 	case 1: viewMenu();
 		break;
 	}
+	myFile.close();
 }
 
-vector<STUDENT> displayParticularStudents(string role)
+void displayParticularStudentsBackend()
 {
-	vector<STUDENT> result;
-	vector<STUDENT> student;
+	ifstream myFile("students.txt");
+	int choose;
+	string line, tokens[10], help;
 
-	for (size_t i = 0; i < student.size(); i++)
-	{
-		if (student[i].role == role)
+	cout << "\n                          _________________________________________________________________";
+	cout << "\n                                        Names:           Surnames:" << endl << endl;
+
+		if (myFile.is_open())
 		{
-			result.push_back(student[i]);
-		}	
+			while (myFile.good())
+			{
+				getline(myFile, tokens[0]);
+
+				tokenize(tokens[0], tokens, ',');
+
+				help = tokens[0];
+
+				if (help == "") {}
+				else
+				{
+					if (help[0] == '\n')
+					{
+						help.erase(0, 1);
+					}
+
+					if (tokens[5] == "Back-end")
+					{
+						if (tokens[7] == "notuse")
+						{
+							cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+						}
+					}
+				}
+			}
+		}
+		cout << "                          _________________________________________________________________" << endl;
+		myFile.close();
+}
+
+void displayParticularStudentsFrontend()
+{
+	ifstream myFile("students.txt");
+	int choose;
+	string line, tokens[10], help;
+
+	cout << "\n                          _________________________________________________________________";
+	cout << "\n                                        Names:           Surnames:" << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[5] == "Front-end")
+				{
+					if (tokens[7] == "notuse")
+					{
+						cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+					}
+				}
+			}
+		}
 	}
-	return result;
+	cout << "                          _________________________________________________________________" << endl;
+	myFile.close();
+}
+
+void displayParticularStudentsQA()
+{
+	ifstream myFile("students.txt");
+	int choose;
+	string line, tokens[10], help;
+
+	cout << "\n                          _________________________________________________________________";
+	cout << "\n                                        Names:           Surnames:" << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[5] == "QA engineer")
+				{
+					if (tokens[7] == "notuse")
+					{
+						cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+					}
+				}
+			}
+		}
+	}
+	cout << "                          _________________________________________________________________" << endl;
+	myFile.close();
+}
+
+void displayTeachersForTeams()
+{
+	ifstream myFile("teachers.txt");
+	int choose;
+	string line, tokens[7], help;
+
+	cout << "\n                          _________________________________________________________________" << endl;
+	cout << "                                       Names:       Surnames:  " << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				} 
+				cout << "                            Account:    " << tokens[0] << "   " << tokens[1] << endl << endl;
+			}
+		}
+	}
+	cout << "                          _________________________________________________________________" << endl;
+	myFile.close();
+}
+
+void editUsername(string student) 
+{
+	fstream myfile("students.txt");
+	string tokens[10], help, newUsername;
+
+	if (myfile.is_open())
+	{
+		string line;
+
+		while (!myfile.eof())
+		{
+			getline(myfile, line);
+
+			if (line != "") {
+				tokenize(line, tokens, ',');
+
+				if (tokens[0] == student) 
+				{
+					tokens[7] = "use";
+					myfile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << endl;
+				}
+			}
+		}
+	}
 }

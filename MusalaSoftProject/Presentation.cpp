@@ -108,7 +108,7 @@ void loginMenu()
         //}
      
          //checkAccId(id, username);
-            viewMenu();
+            teamMenu();
        
     }else
     {
@@ -633,8 +633,8 @@ void viewMenu()
 
 void teamMenu()
 {
-    TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA;
-    string choose;
+    TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA, nameCheck;
+    string nothing;
     ofstream myFile;
     myFile.open("team.txt", ios::app);
 
@@ -644,55 +644,52 @@ void teamMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                     Create a team                    |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    +------------------------------------------------------+" << endl; 
+    cout << "                    +------------------------------------------------------+" << endl << endl; 
 
+    getline(cin, nothing);
     cout << "                                   Enter your the team name: ";
-    cin >> name.name;
+    getline(cin, name.name);
 
-    cout << "                                   Write a description of the team: ";
-    cin >> description.description;
+    cout << "\n                                   Write a description of the team: ";
+    getline(cin, description.description);
 
-    cout << "                                   Enter the date of set up: ";
+    cout << "\n                                   Enter the date of set up: " << endl;
     cout << "                                   Example - 05.03.2020 - dd.mm.yyyy: ";
-    cin >> date.date;
+    getline(cin, date.date);
     cout << endl;
 
-    cout << "\n                           Choose to see who is free for your team: " << endl;
-    cout << "                                         1. Back-end" << endl;
-    cout << "                                         2. Front-end" << endl;
-    cout << "                                         3. QA engineer" << endl << endl;
-    cout << "                                        Type your choice: ";
-    getline(cin, choose);
-
-    while (choose != "Back-end" && choose != "Front-end" && choose != "QA engineer")
-    {
-        cout << "                         Invalid input, please try again: "; getline(cin, choose);
-        cin.clear();
-    }
-
-    vector<STUDENT> filter = displayParticularStudents(choose);
-
-    cout << "     Names:           Surnames:" << endl;
-    for (size_t i = 0; i < filter.size(); i++)
-    {
-        cout << filter[i].name << " " << filter[i].surname << endl;
-    }
-
-    if (choose == "Back-end")
-    {
-        cin >> studentBackend.teammatesBackend;
-    }
-    else if (choose == "Front-end")
-    {
-        cin >> studentFrontend.teammatesFrontend;
-    }
-    else if (choose == "QA engineer")
-    {
-        cin >> studentQA.teammatesQA;
-    }
     
+    cout << "\n                           Choose to see who is free for your team: " << endl << endl;
+    cout << "                                      1. Back-end students" << endl;
+
+    displayParticularStudentsBackend();
+
+    cout << "                                Enter the name and the sername: ";
+    getline(cin, studentBackend.teammatesBackend);
+    editUsername(studentBackend.teammatesBackend);
+    cout << endl;
+
+    cout << "                                      2. Front-end students" << endl;
+
+    displayParticularStudentsFrontend();
+
+    cout << "                                Enter the name and the sername: ";
+    getline(cin, studentFrontend.teammatesFrontend);
+    editUsername(studentFrontend.teammatesFrontend);
+    cout << endl;
+
+    cout << "                                      3. QA engineer students" << endl;
+
+    displayParticularStudentsQA();
+
+    cout << "                                Enter the name and the sername: ";
+    getline(cin, studentQA.teammatesQA);
+    editUsername(studentQA.teammatesQA);
+    cout << endl;
+
+    displayTeachersForTeams();
     cout << "                                   Add a teacher to your team: ";
-    cin >> teacher.teacher;
+    getline(cin, teacher.teacher);
 
     myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << endl;
     myFile.close();
@@ -733,3 +730,5 @@ void teacherRegisterMenu()
     myFile << name.name << "," << surname.surname << "," << email.email << "," << id.id << "," << endl;
     myFile.close();
 }
+
+ 
