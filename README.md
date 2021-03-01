@@ -5,7 +5,7 @@
 </p>
 <br>
 
-This is our project for ScaleFocus. This is a game which we created with C++ in Visual Studio 2019!
+This is our project for MusalaSoft. 
 
 ## Our Team
 
