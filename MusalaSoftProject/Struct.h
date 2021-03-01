@@ -31,6 +31,7 @@ struct TEACHER
 {
 	string name = "";
 	string surname = "";
+	string password = "";
 	string email = "";	
 	string id = "";
 };

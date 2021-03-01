@@ -5,9 +5,10 @@ using namespace std;
 
 #pragma once
 
-string checkAcc(STUDENT& username, STUDENT& password);
-string checkAccStudentsId(STUDENT id, STUDENT& username);
-string checkAccTeachersId(STUDENT id, STUDENT& username);
+bool checkAccStudents(STUDENT& username, STUDENT& password);
+bool checkAccTeachers(STUDENT& username, STUDENT& password);
+void checkAccStudentsId(STUDENT& username);
+void checkAccTeachersId(STUDENT& username);
 bool isCharacter(const char character);
 bool isEmailValid(const char* email);
 bool isClassnameValid(string& classname);

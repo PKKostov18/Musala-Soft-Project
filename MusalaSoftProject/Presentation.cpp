@@ -68,7 +68,7 @@ void mainMenu()
 void loginMenu()
 {
     STUDENT username, password, id;
-    string result = "invalidAccount";
+    string result = "invalidAccount", result1 = "invalidAccount";
     char choice;
     int choose;
 
@@ -86,17 +86,18 @@ void loginMenu()
     {
         system("cls");
 
-        //while (result == "invalidAccount")
-        //{
-            cout << "                    +------------------------------------------------------+" << endl;
-            cout << "                    |                                                      |" << endl;
-            cout << "                    |                         Login                        |" << endl;
-            cout << "                    |                                                      |" << endl;
-            cout << "                    +------------------------------------------------------+" << endl;
-            cout << "                    |                                                      |" << endl;
-            cout << "                    |            Please, enter your account data:          |" << endl;
-            cout << "                    |                                                      |" << endl;
-            cout << "                    +------------------------------------------------------+" << endl << endl;
+        cout << "                    +------------------------------------------------------+" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    |                         Login                        |" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    +------------------------------------------------------+" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    |            Please, enter your account data:          |" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    +------------------------------------------------------+" << endl << endl;
+
+        while (result == "invalidAccount" && result1 == "invalidAccount")
+        {
             cout << "                                     Enter your name: ";
             cin >> username.name;
             cout << endl;
@@ -104,11 +105,24 @@ void loginMenu()
             cin >> password.password;
             cout << endl;
 
-            //result = checkAcc(username, password);
-        //}
-     
-         //checkAccId(id, username);
-            teamMenu();
+            result = checkAccStudents(username, password);
+            result1 = checkAccTeachers(username, password);
+
+            while (checkAccStudents(username, password) == false && checkAccTeachers(username, password) == false)
+            {
+                cout << "\n                    Invalid account, please try to login again!\n" << endl;
+
+                cout << "                                     Enter your name: ";
+                cin >> username.name;
+                cout << endl;
+                cout << "                                     Enter your password: ";
+                cin >> password.password;
+                cout << endl;
+            }
+        }
+
+        checkAccStudentsId(username);
+        checkAccTeachersId(username);
        
     }else
     {
@@ -174,7 +188,6 @@ void registerMenu()
     while (password.password.length() > 10 || password.password.length() < 5)
     {
         cout << "\n                           Invalid input, please try again: "; cin >> password.password;
-        
     }
     cout << endl;
 
@@ -697,7 +710,7 @@ void teamMenu()
 
 void teacherRegisterMenu()
 {
-    TEACHER name, surname, date, email, id;
+    TEACHER name, surname, date, email, id, password;
     string choose;
     ofstream myFile;
     myFile.open("teachers.txt", ios::app);
@@ -716,6 +729,15 @@ void teacherRegisterMenu()
     cout << "\n                                         Surname: ";
     cin >> surname.surname;
 
+    cout << "\n                      !!!Your password MUST be between 5 and 10 symbols!!!" << endl;
+    cout << "                                         Password: ";
+    cin >> password.password;
+
+    while (password.password.length() > 10 || password.password.length() < 5)
+    {
+        cout << "\n                           Invalid input, please try again: "; cin >> password.password;
+    }
+
     cout << "\n                                         Email: ";
     cin >> email.email;
 
@@ -730,5 +752,3 @@ void teacherRegisterMenu()
     myFile << name.name << "," << surname.surname << "," << email.email << "," << id.id << "," << endl;
     myFile.close();
 }
-
- 
