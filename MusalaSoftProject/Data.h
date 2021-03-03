@@ -7,8 +7,10 @@ using namespace std;
 
 bool checkAccStudents(STUDENT& username, STUDENT& password);
 bool checkAccTeachers(STUDENT& username, STUDENT& password);
+bool checkAccAdmin(STUDENT& username, STUDENT& password);
 void checkAccStudentsId(STUDENT& username);
 void checkAccTeachersId(STUDENT& username);
+void checkAccAdminId(STUDENT& username);
 bool isCharacter(const char character);
 bool isEmailValid(const char* email);
 bool isClassnameValid(string& classname);
@@ -20,3 +22,5 @@ void displayParticularStudentsFrontend();
 void displayParticularStudentsQA();
 void displayTeachersForTeams();
 void editUsername(string student);
+void deleteAccount();
+void editUsername();

@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="admin.txt" />
     <Text Include="students.txt" />
     <Text Include="teachers.txt" />
     <Text Include="team.txt" />

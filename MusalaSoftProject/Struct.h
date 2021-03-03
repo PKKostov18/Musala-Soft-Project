@@ -13,6 +13,7 @@ struct STUDENT
 	string role = "";
 	string email = "";
 	string id = "";
+	string status = "";
 };
 
 struct TEAM
@@ -41,4 +42,10 @@ struct SCHOOL
 	string name = "";
 	string town = "";
 	string address = "";
+};
+
+struct EMAIL
+{
+	string name = "";
+	string description = "";
 };

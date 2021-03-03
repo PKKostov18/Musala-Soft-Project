@@ -108,7 +108,7 @@ void loginMenu()
             result = checkAccStudents(username, password);
             result1 = checkAccTeachers(username, password);
 
-            while (checkAccStudents(username, password) == false && checkAccTeachers(username, password) == false)
+            while (checkAccStudents(username, password) == false && checkAccTeachers(username, password) == false && checkAccAdmin(username, password) == false)
             {
                 cout << "\n                    Invalid account, please try to login again!\n" << endl;
 
@@ -123,6 +123,7 @@ void loginMenu()
 
         checkAccStudentsId(username);
         checkAccTeachersId(username);
+        checkAccAdminId(username);
        
     }else
     {
@@ -158,85 +159,122 @@ void loginMenu()
 
 void registerMenu()
 {
-    STUDENT username, password, surname, classname, email, role, id;
+    STUDENT username, password, surname, classname, email, role, id, status;
     string c_password;
     ofstream myFile;
+    int choice;
     myFile.open("students.txt", ios::app);
 
     system("cls");
 
-    cout << "                    +------------------------------------------------------+" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                       Register                       |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    +------------------------------------------------------+" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |            Please, enter your account data:          |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    +------------------------------------------------------+" << endl << endl;
+    cout << "\n                                Like what you want to register? " << endl;
+    cout << "                                         1. Student " << endl;
+    cout << "                                         2. Teacher " << endl;
+    cout << "\n                                           Choose: "; 
 
-    cout << "                                   Enter your name: ";
-    cin >> username.name;
-
-    cout << "                                   Enter your surname: ";
-    cin >> username.surname;
-
-    cout << "\n                      !!!Your password MUST be between 5 and 10 symbols!!!" << endl;
-    cout << "                                   Enter your password: ";
-    cin >> password.password;
-
-    while (password.password.length() > 10 || password.password.length() < 5)
+    while (!(cin >> choice))
     {
-        cout << "\n                           Invalid input, please try again: "; cin >> password.password;
-    }
-    cout << endl;
-
-    cout << "                                   Enter your class" << endl;
-    cout << "                                   Example - 10A: ";
-    cin >> classname.classname;
-
-    isClassnameValid(classname.classname);
-
-    cout << "                                   Enter your email: ";
-    cin >> email.email;
-
-    while (!isEmailValid(email.email.c_str()))
-    {
-        cout << "\n                           Invalid email, try again: "; cin >> email.email;
-    }
-    cout << endl;
-
-    cout << "                                Choose your role between:           " << endl << endl;
-    cout << "                                     1. Back-end                        " << endl;
-    cout << "                                     2. Front-end                       " << endl;
-    cout << "                                     3. Scrum Master                    " << endl;
-    cout << "                                     4. QA engineer                     " << endl;
-    cout << "                                   Type your choice: ";
-    getline(cin, role.role);
-    cout << endl;
-
-    while (role.role != "Back-end" && role.role != "Front-end" && role.role != "Scrum Master" && role.role != "QA engineer")
-    {
-        cout << "                         Invalid input, please try again: "; getline(cin, role.role);
+        cout << "\n                       Not an integer, try again: "; cin >> choice;
         cin.clear();
-    }
-    
-    if(role.role == "Scrum Master")
-    {
-        id.id = "0";
-    }else if (role.role == "Front-end")
-    {
-        id.id = "1";
-    }else if (role.role == "Back-end")
-    {
-        id.id = "2";
-    }else if (role.role == "QA engineer")
-    {
-        id.id = "3";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    myFile << username.name << "," << username.surname << "," << password.password << ","  << classname.classname << "," << email.email << "," << role.role << "," << id.id << "," << endl;
-    myFile.close();
+    while (choice != 1 && choice != 2)
+    {
+        cout << "                          Invalid input, try again:";
+        while (!(cin >> choice))
+        {
+            cout << "\n                            Not an integer, try again: "; cin >> choice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    if (choice == 1)
+    {
+        system("cls");
+
+        cout << "                    +------------------------------------------------------+" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    |                       Register                       |" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    +------------------------------------------------------+" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    |            Please, enter your account data:          |" << endl;
+        cout << "                    |                                                      |" << endl;
+        cout << "                    +------------------------------------------------------+" << endl << endl;
+
+        cout << "                                   Enter your name: ";
+        cin >> username.name;
+
+        cout << "                                   Enter your surname: ";
+        cin >> username.surname;
+
+        cout << "\n                      !!!Your password MUST be between 5 and 10 symbols!!!" << endl;
+        cout << "                                   Enter your password: ";
+        cin >> password.password;
+
+        while (password.password.length() > 10 || password.password.length() < 5)
+        {
+            cout << "\n                           Invalid input, please try again: "; cin >> password.password;
+        }
+        cout << endl;
+
+        cout << "                                   Enter your class" << endl;
+        cout << "                                   Example - 10A: ";
+        cin >> classname.classname;
+
+        isClassnameValid(classname.classname);
+
+        cout << "                                   Enter your email: ";
+        cin >> email.email;
+
+        while (!isEmailValid(email.email.c_str()))
+        {
+            cout << "\n                           Invalid email, try again: "; cin >> email.email;
+        }
+        cout << endl;
+
+        cout << "                                Choose your role between:           " << endl << endl;
+        cout << "                                     1. Back-end                        " << endl;
+        cout << "                                     2. Front-end                       " << endl;
+        cout << "                                     3. Scrum Master                    " << endl;
+        cout << "                                     4. QA engineer                     " << endl;
+        cout << "                                   Type your choice: ";
+        getline(cin, role.role);
+        cout << endl;
+
+        while (role.role != "Back-end" && role.role != "Front-end" && role.role != "Scrum Master" && role.role != "QA engineer")
+        {
+            cout << "                         Invalid input, please try again: "; getline(cin, role.role);
+            cin.clear();
+        }
+
+        if (role.role == "Scrum Master")
+        {
+            id.id = "0";
+        }
+        else if (role.role == "Front-end")
+        {
+            id.id = "1";
+        }
+        else if (role.role == "Back-end")
+        {
+            id.id = "2";
+        }
+        else if (role.role == "QA engineer")
+        {
+            id.id = "3";
+        }
+
+        status.status = "notuse";
+        myFile << username.name << "," << username.surname << "," << password.password << "," << classname.classname << "," << email.email << "," << role.role << "," << id.id << "," << status.status << "," << endl;
+        myFile.close();
+    }
+    else if (choice == 2)
+    {
+        teacherRegisterMenu();
+    }
 }
 
 void scrumMasterMenu()
@@ -262,7 +300,7 @@ void scrumMasterMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; 
+    cout << "\n                                   Enter your selection: "; 
     while (!(cin >> teamChoice))
     {
         cout << "\n                       Not an integer, try again: "; cin >> teamChoice;
@@ -284,16 +322,22 @@ void scrumMasterMenu()
 
     switch (teamChoice)
     {
-    case 1: teamMenu();
+    case 1: 
+        system("cls");
+        teamRegisterMenu();
         break;
 
-    case 2: ;
+    case 2:
+        system("cls");
         break;
 
-    case 3: ;
+    case 3:
+        system("cls");
+        emailMenu();
         break;
 
     case 9:
+        system("cls");
         mainMenu();
         break;
     }
@@ -521,20 +565,19 @@ void adminMenu()
     cout << "                    |     Please, select a option from the ones below:     |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                                                      |" << endl;
+    cout << "                    |                   1. Manage accounts                 |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   1. Manage account                  |" << endl;
+    cout << "                    |                   2. Manage teams                    |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   2. School                          |" << endl;
+    cout << "                    |                   3. School                          |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   3. Inbox                           |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                   4. Add teacher                     |" << endl;
+    cout << "                    |                   4. Inbox                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                   9. Back                            |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "                                   Enter your selection: "; 
+    cout << "\n                                   Enter your selection: "; 
     while (!(cin >> adminChoice))
     {
         cout << "\n                       Not an integer, try again: "; cin >> adminChoice;
@@ -555,18 +598,23 @@ void adminMenu()
 
     switch (adminChoice)
     {
-    case 1:;
+    case 1:
+        system("cls");
+        manageAccountsMenu();
         break;
 
     case 2:
+        system("cls");
+        break;
+
+    case 3:
+        system("cls");
         viewMenu();
         break;
 
-    case 3:;
-        break;
-
     case 4: 
-        teacherMenu();
+        system("cls");
+        viewEmails();
         break;
 
     case 9:
@@ -644,11 +692,12 @@ void viewMenu()
     }
 }
 
-void teamMenu()
+void teamRegisterMenu()
 {
     TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA, nameCheck;
     string nothing;
     ofstream myFile;
+    int choice;
     myFile.open("team.txt", ios::app);
 
     system("cls");
@@ -706,6 +755,32 @@ void teamMenu()
 
     myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << endl;
     myFile.close();
+
+    cout << "\n                                   Register successful!";
+    cout << "                                   Type 1 to back: "; 
+
+    while (!(cin >> choice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> choice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choice != 1)
+    {
+        cout << "                          Invalid input, try again:";
+        while (!(cin >> choice))
+        {  
+            cout << "\n                            Not an integer, try again: "; cin >> choice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    if (choice == 1)
+    {
+        scrumMasterMenu();
+    }
 }
 
 void teacherRegisterMenu()
@@ -713,13 +788,18 @@ void teacherRegisterMenu()
     TEACHER name, surname, date, email, id, password;
     string choose;
     ofstream myFile;
+    int choice;
     myFile.open("teachers.txt", ios::app);
 
     system("cls");
 
     cout << "                    +------------------------------------------------------+" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   Register a teacher                 |" << endl;
+    cout << "                    |                       Register                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |            Please, enter your account data:          |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl << endl;
 
@@ -751,4 +831,195 @@ void teacherRegisterMenu()
 
     myFile << name.name << "," << surname.surname << "," << email.email << "," << id.id << "," << endl;
     myFile.close();
+}
+
+void emailMenu()
+{
+    ofstream myfile("email.txt", ios::app);
+    EMAIL name, description;
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                         Email                        |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "\n                                 Enter your name: "; cin >> name.name;
+
+    cout << "\n                                 Enter a description: "; cin >> description.description;
+
+    myfile << name.name << "," << description.description << "," << endl;
+}
+
+void viewEmails()
+{
+    ifstream myFile("email.txt");
+    STUDENT students;
+    int choose;
+    string line, tokens[7], help;
+
+    cout << "               From:         Descriptions:" << endl << endl;
+
+    if (myFile.is_open())
+    {
+        while (myFile.good())
+        {
+            getline(myFile, tokens[0]);
+
+            tokenize(tokens[0], tokens, ',');
+
+            help = tokens[0];
+
+            if (help == "") {}
+            else
+            {
+                if (help[0] == '\n')
+                {
+                    help.erase(0, 1);
+                }
+                cout << "  Email:    " << tokens[0] << "   " << tokens[1] << endl << endl;
+            }
+        }
+    }
+
+    cout << "                               Type 1 to back: ";
+    while (!(cin >> choose))
+    {
+        cout << "\n                        Not an integer, please try again: "; cin >> choose;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choose != 1)
+    {
+        cout << "\n                             Invalid input, try again: ";
+        while (!(cin >> choose))
+        {
+            cout << "\n                     Not an integer, please try again: "; cin >> choose;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choose)
+    {
+    case 1: adminMenu();
+        break;
+    }
+}
+
+void manageAccountsMenu()
+{
+    int choice;
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    Manage accounts                   |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   1. Delete account                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   2. Edit account password           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   9. Back                            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "\n                                   Enter your selection: ";
+    while (!(cin >> choice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> choice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choice != 1 && choice != 2 && choice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> choice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> choice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choice)
+    {
+    case 1: 
+        system("cls");
+        deleteAccount();
+        break;
+
+    case 2: 
+        system("cls");
+        editUsername();
+        break;
+
+    case 9: 
+        system("cls");
+        adminMenu();
+        break;
+    }
+}
+
+void manageTeamsMenu()
+{
+    int choice;
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                      Manage teams                    |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   1. Delete account                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   2. Edit team name                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   9. Back                            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "\n                                   Enter your selection: ";
+    while (!(cin >> choice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> choice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choice != 1 && choice != 2 && choice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> choice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> choice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choice)
+    {
+    case 1:
+        break;
+
+    case 2:
+        break;
+
+    case 9: adminMenu();
+        break;
+    }
 }

@@ -82,6 +82,43 @@ bool checkAccTeachers(STUDENT& username, STUDENT& password)
 	return false;
 }
 
+bool checkAccAdmin(STUDENT& username, STUDENT& password)
+{
+	ifstream myFile("admin.txt");
+	string line, tokens[10], help;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[0] == username.name)
+				{
+					if (tokens[2] == password.password)
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+	myFile.close();
+	return false;
+}
+
 void checkAccStudentsId(STUDENT& username)
 {
 	ifstream myFile("students.txt");
@@ -109,23 +146,23 @@ void checkAccStudentsId(STUDENT& username)
 				{
 					if (tokens[6] == "0")
 					{
+						system("cls");
 						scrumMasterMenu();
 					}
 					else if (tokens[6] == "1")
 					{
+						system("cls");
 						frontEndMenu();
 					}
 					else if (tokens[6] == "2")
 					{
+						system("cls");
 						backEndMenu();
 					}
 					else if (tokens[6] == "3")
 					{
+						system("cls");
 						QAEngineerMenu();
-					}
-					else
-					{
-						teacherMenu();
 					}
 				}
 			}
@@ -161,7 +198,45 @@ void checkAccTeachersId(STUDENT& username)
 				{
 					if (tokens[4] == "4")
 					{
+						system("cls");
 						teacherMenu();
+					}
+				}
+			}
+		}
+	}
+	myFile.close();
+}
+
+void checkAccAdminId(STUDENT& username)
+{
+	ifstream myFile("admin.txt");
+	string line, tokens[10], help;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help == "") {}
+			else
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[0] == username.name)
+				{
+					if (tokens[4] == "5")
+					{
+						system("cls");
+						adminMenu();
 					}
 				}
 			}
@@ -521,5 +596,196 @@ void editUsername(string student)
 				}
 			}
 		}
+	}
+}
+
+void deleteAccount() 
+{
+	ifstream myfile("students.txt");
+	ofstream tmpFile("studentsTmp.txt");
+	string tokens[10], help;
+	int counter = 0, choice;
+	string line;
+	bool userExist = false;
+
+	cout << "                 +---------------------------------------------------+" << endl;
+	cout << "\n                                Name of the user: ";
+	cin >> help;
+
+	if (myfile.is_open())
+	{
+		string line;
+		while (!myfile.eof())
+		{
+			getline(myfile, line);
+
+			if (line != "") {
+
+				tokenize(line, tokens, ',');
+
+				if (help != tokens[0]) 
+				{
+					if (tmpFile.is_open())
+					{
+						counter = 7;
+						tmpFile << tokens[counter] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << endl;
+					}
+				}
+				else
+				{
+					userExist = true;
+				}
+			}
+		}
+		tmpFile.close();
+		myfile.close();
+
+		char buff[256];
+
+		strerror_s(buff, 25);
+		cerr << "                  Error occur: " << buff << endl;
+
+		if (remove("students.txt") != 0) 
+		{
+			strerror_s(buff, 25);
+			cerr << "                  Error occur: " << buff << endl;
+		}
+		else {
+			cout << "\n                  Deleting account 50% done" << endl;
+		}
+
+		if (rename("studentsTmp.txt", "students.txt") != 0)
+		{
+			strerror_s(buff, 25);
+			cerr << "                  Error occur: " << buff << endl;
+		}
+		else
+		{
+			cout << "\n                  Deleting account done!!!!" << endl;
+		}
+	}
+
+	cout << "\n                          Type 1 to back: ";  
+	while (!(cin >> choice))
+	{
+		cout << "\n                       Not an integer, try again: "; cin >> choice;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choice != 1)
+	{
+		cout << "                       Invalid input, try again:";
+		while (!(cin >> choice))
+		{
+			cout << "\n                          Not an integer, try again: "; cin >> choice;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	if (choice == 1)
+	{
+		system("cls");
+		manageAccountsMenu();
+	}
+}
+
+void editUsername() 
+{
+	ifstream myfile("students.txt");
+	ofstream tmpFile("studentsTmp.txt");
+	string tokens[10], help, newPassword;
+	int counter = 0, choice;
+	bool userExist = false;
+
+	cout << "                 +---------------------------------------------------+" << endl;
+	cout << "\n                                Name of the user: ";
+	cin >> help;
+
+	if (myfile.is_open())
+	{
+		string line;
+
+		while (!myfile.eof())
+		{
+			getline(myfile, line);
+
+			if (line != "") 
+			{
+				tokenize(line, tokens, ',');
+
+				if (help != tokens[0])
+				{
+					if (tmpFile.is_open())
+					{
+						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << endl;
+					}
+				}
+				else
+				{
+					cout << "New password: ";
+					cin >> newPassword;
+					tmpFile << tokens[0] << "," << tokens[1] << "," << newPassword << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << endl;
+					userExist = true;
+				}
+			}
+		}
+
+		if (!userExist)
+		{
+			cout << "                     This user doesn't exist, nothing happened" << endl;
+			myfile.close();
+			remove("students.txt");
+			tmpFile.close();
+			rename("studentsTmp.txt", "students.txt");
+		}
+		else
+		{
+			myfile.close();
+
+			if (remove("students.txt") != 0) {
+				cerr << "                     A wild error appeared: ";
+			}
+			else {
+				cout << "\n                     Editing password 50% done!" << endl;
+			}
+
+			tmpFile.close();
+
+			if (rename("studentsTmp.txt", "students.txt") != 0)
+			{
+				cerr << "                     A wild error appeared : ";
+			}
+			else
+			{
+				cout << "\n                     Editing password done!!!!" << endl;
+			}
+		}
+	}
+
+	cout << "\n                          Type 1 to back: ";
+	while (!(cin >> choice))
+	{
+		cout << "\n                       Not an integer, try again: "; cin >> choice;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choice != 1)
+	{
+		cout << "                       Invalid input, try again:";
+		while (!(cin >> choice))
+		{
+			cout << "\n                          Not an integer, try again: "; cin >> choice;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	if (choice == 1)
+	{
+		system("cls");
+		manageAccountsMenu();
 	}
 }
