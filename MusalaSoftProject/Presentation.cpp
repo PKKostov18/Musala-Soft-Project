@@ -96,36 +96,26 @@ void loginMenu()
         cout << "                    |                                                      |" << endl;
         cout << "                    +------------------------------------------------------+" << endl << endl;
 
-        while (result == "invalidAccount" && result1 == "invalidAccount")
+        cout << "                                     Enter your name: ";
+        cin >> username.name;
+        cout << endl;
+        cout << "                                     Enter your password: ";
+        cin >> password.password;
+        cout << endl;
+
+        while (checkAccStudentsId(username) == false && checkAccTeachersId(username) == false && checkAccAdminId(username) == false)
         {
+            cout << "\n                       Invalid account, please try to login again!\n" << endl;
+
             cout << "                                     Enter your name: ";
             cin >> username.name;
             cout << endl;
             cout << "                                     Enter your password: ";
             cin >> password.password;
             cout << endl;
-
-            result = checkAccStudents(username, password);
-            result1 = checkAccTeachers(username, password);
-
-            while (checkAccStudents(username, password) == false && checkAccTeachers(username, password) == false && checkAccAdmin(username, password) == false)
-            {
-                cout << "\n                    Invalid account, please try to login again!\n" << endl;
-
-                cout << "                                     Enter your name: ";
-                cin >> username.name;
-                cout << endl;
-                cout << "                                     Enter your password: ";
-                cin >> password.password;
-                cout << endl;
-            }
-        }
-
-        checkAccStudentsId(username);
-        checkAccTeachersId(username);
-        checkAccAdminId(username);
-       
-    }else
+        } 
+    }
+    else
     {
         system("cls");
 
@@ -385,7 +375,8 @@ void frontEndMenu()
 
     switch (frontChoice)
     {
-    case 1:;
+    case 1:
+        teamRegisterMenu();
         break;
 
     case 9:
@@ -440,7 +431,7 @@ void backEndMenu()
         break;
 
     case 9:
-        mainMenu();
+        mainMenu();                             
         break;
     }
 }
@@ -573,7 +564,7 @@ void adminMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                   4. Inbox                           |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                   9. Back                            |" << endl;
+    cout << "                    |                   9. Log out                         |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
@@ -726,38 +717,38 @@ void teamRegisterMenu()
 
     displayParticularStudentsBackend();
 
-    cout << "                                Enter the name and the sername: ";
-    getline(cin, studentBackend.teammatesBackend);
-    editUsername(studentBackend.teammatesBackend);
+    cout << "                                       Enter the name: ";
+    cin >> studentBackend.teammatesBackend;
+    changeStudentsStatus(studentBackend.teammatesBackend);
     cout << endl;
 
     cout << "                                      2. Front-end students" << endl;
 
     displayParticularStudentsFrontend();
 
-    cout << "                                Enter the name and the sername: ";
-    getline(cin, studentFrontend.teammatesFrontend);
-    editUsername(studentFrontend.teammatesFrontend);
+    cout << "                                       Enter the name: ";
+    cin >> studentFrontend.teammatesFrontend;
+    changeStudentsStatus(studentFrontend.teammatesFrontend);
     cout << endl;
 
     cout << "                                      3. QA engineer students" << endl;
 
     displayParticularStudentsQA();
 
-    cout << "                                Enter the name and the sername: ";
-    getline(cin, studentQA.teammatesQA);
-    editUsername(studentQA.teammatesQA);
+    cout << "                                       Enter the name: ";
+    cin >> studentQA.teammatesQA;
+    changeStudentsStatus(studentQA.teammatesQA);
     cout << endl;
 
     displayTeachersForTeams();
     cout << "                                   Add a teacher to your team: ";
-    getline(cin, teacher.teacher);
+    cin >> teacher.teacher;
 
     myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << endl;
     myFile.close();
 
     cout << "\n                                   Register successful!";
-    cout << "                                   Type 1 to back: "; 
+    cout << "\n\n                                   Type 1 to back: "; 
 
     while (!(cin >> choice))
     {
@@ -779,16 +770,16 @@ void teamRegisterMenu()
 
     if (choice == 1)
     {
+        system("cls");
         scrumMasterMenu();
     }
-}
+} 
 
 void teacherRegisterMenu()
 {
     TEACHER name, surname, date, email, id, password;
     string choose;
     ofstream myFile;
-    int choice;
     myFile.open("teachers.txt", ios::app);
 
     system("cls");
@@ -837,6 +828,7 @@ void emailMenu()
 {
     ofstream myfile("email.txt", ios::app);
     EMAIL name, description;
+    string nothing;
 
     system("cls");
 
@@ -846,9 +838,10 @@ void emailMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
 
-    cout << "\n                                 Enter your name: "; cin >> name.name;
+    getline(cin, nothing);
+    cout << "\n                                 Enter your name: "; getline(cin, name.name);
 
-    cout << "\n                                 Enter a description: "; cin >> description.description;
+    cout << "\n                                 Enter a description: "; getline(cin, description.description);
 
     myfile << name.name << "," << description.description << "," << endl;
 }

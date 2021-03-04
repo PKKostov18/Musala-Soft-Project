@@ -49,5 +49,8 @@
     <Text Include="admin.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="email.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

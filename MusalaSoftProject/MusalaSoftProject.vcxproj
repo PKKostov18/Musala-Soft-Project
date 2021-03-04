@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="admin.txt" />
+    <Text Include="email.txt" />
     <Text Include="students.txt" />
     <Text Include="teachers.txt" />
     <Text Include="team.txt" />

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool checkAccStudents(STUDENT& username, STUDENT& password) 
+bool checkAccStudentsId(STUDENT& username)
 {
 	ifstream myFile("students.txt");
 	string line, tokens[10], help;
@@ -23,19 +23,43 @@ bool checkAccStudents(STUDENT& username, STUDENT& password)
 
 			help = tokens[0];
 
-			if (help == "") {}
+			if (help == "") 
+			{
+			}
 			else
 			{
 				if (help[0] == '\n')
 				{
 					help.erase(0, 1);
 				}
-
-				if (tokens[0] == username.name)
+				if (username.name == tokens[0])
 				{
-					if (tokens[2] == password.password)
+					if (tokens[0] == username.name)
 					{
-						return true;
+						if (tokens[6] == "0")
+						{
+							system("cls");
+							scrumMasterMenu();
+							return true;
+						}
+						else if (tokens[6] == "1")
+						{
+							system("cls");
+							frontEndMenu();
+							return true;
+						}
+						else if (tokens[6] == "2")
+						{
+							system("cls");
+							backEndMenu();
+							return true;
+						}
+						else if (tokens[6] == "3")
+						{
+							system("cls");
+							QAEngineerMenu();
+							return true;
+						}
 					}
 				}
 			}
@@ -45,7 +69,7 @@ bool checkAccStudents(STUDENT& username, STUDENT& password)
 	return false;
 }
 
-bool checkAccTeachers(STUDENT& username, STUDENT& password)
+bool checkAccTeachersId(STUDENT& username)
 {
 	ifstream myFile("teachers.txt");
 	string line, tokens[10], help;
@@ -68,21 +92,26 @@ bool checkAccTeachers(STUDENT& username, STUDENT& password)
 					help.erase(0, 1);
 				}
 
-				if (tokens[0] == username.name)
+				if (username.name == tokens[0])
 				{
-					if (tokens[2] == password.password)
+					if (tokens[0] == username.name)
 					{
-						return true;
+						if (tokens[4] == "4")
+						{
+							system("cls");
+							teacherMenu();
+							return true;
+						}
 					}
 				}
 			}
 		}
 	}
-	myFile.close();
+	myFile.close();	
 	return false;
 }
 
-bool checkAccAdmin(STUDENT& username, STUDENT& password)
+bool checkAccAdminId(STUDENT& username)
 {
 	ifstream myFile("admin.txt");
 	string line, tokens[10], help;
@@ -105,144 +134,23 @@ bool checkAccAdmin(STUDENT& username, STUDENT& password)
 					help.erase(0, 1);
 				}
 
-				if (tokens[0] == username.name)
+				if (username.name == tokens[0])
 				{
-					if (tokens[2] == password.password)
+					if (tokens[0] == username.name)
 					{
-						return true;
+						if (tokens[4] == "5")
+						{
+							system("cls");
+							adminMenu();
+							return true;
+						}
 					}
 				}
 			}
 		}
 	}
-	myFile.close();
+	myFile.close();	
 	return false;
-}
-
-void checkAccStudentsId(STUDENT& username)
-{
-	ifstream myFile("students.txt");
-	string line, tokens[10], help;
-
-	if (myFile.is_open())
-	{
-		while (myFile.good())
-		{
-			getline(myFile, tokens[0]);
-
-			tokenize(tokens[0], tokens, ',');
-
-			help = tokens[0];
-
-			if (help == "") {}
-			else
-			{
-				if (help[0] == '\n')
-				{
-					help.erase(0, 1);
-				}
-
-				if (tokens[0] == username.name)
-				{
-					if (tokens[6] == "0")
-					{
-						system("cls");
-						scrumMasterMenu();
-					}
-					else if (tokens[6] == "1")
-					{
-						system("cls");
-						frontEndMenu();
-					}
-					else if (tokens[6] == "2")
-					{
-						system("cls");
-						backEndMenu();
-					}
-					else if (tokens[6] == "3")
-					{
-						system("cls");
-						QAEngineerMenu();
-					}
-				}
-			}
-		}
-	}
-	myFile.close();
-}
-
-void checkAccTeachersId(STUDENT& username)
-{
-	ifstream myFile("teachers.txt");
-	string line, tokens[10], help;
-
-	if (myFile.is_open())
-	{
-		while (myFile.good())
-		{
-			getline(myFile, tokens[0]);
-
-			tokenize(tokens[0], tokens, ',');
-
-			help = tokens[0];
-
-			if (help == "") {}
-			else
-			{
-				if (help[0] == '\n')
-				{
-					help.erase(0, 1);
-				}
-
-				if (tokens[0] == username.name)
-				{
-					if (tokens[4] == "4")
-					{
-						system("cls");
-						teacherMenu();
-					}
-				}
-			}
-		}
-	}
-	myFile.close();
-}
-
-void checkAccAdminId(STUDENT& username)
-{
-	ifstream myFile("admin.txt");
-	string line, tokens[10], help;
-
-	if (myFile.is_open())
-	{
-		while (myFile.good())
-		{
-			getline(myFile, tokens[0]);
-
-			tokenize(tokens[0], tokens, ',');
-
-			help = tokens[0];
-
-			if (help == "") {}
-			else
-			{
-				if (help[0] == '\n')
-				{
-					help.erase(0, 1);
-				}
-
-				if (tokens[0] == username.name)
-				{
-					if (tokens[4] == "5")
-					{
-						system("cls");
-						adminMenu();
-					}
-				}
-			}
-		}
-	}
-	myFile.close();
 }
 
 bool isCharacter(const char character)
@@ -308,11 +216,16 @@ int tokenize(string line, string* results, char delimiter)
 void displayStudents()
 {
 	ifstream myFile("students.txt");
-	STUDENT students;
 	int choose;
 	string line, tokens[7], help;
 
-	cout << "              Names:    Surnames:   Passowrds:     Class:     Emails:     Role:" << endl << endl;
+	cout << "\n                    +------------------------------------------------------+" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    |                    List of students                  |" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    +------------------------------------------------------+" << endl << endl;
+
+	cout << "              Names:    Surnames:     Passwords:     Class:     Emails:     Roles:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -331,12 +244,13 @@ void displayStudents()
 				{
 					help.erase(0, 1);
 				}
+
 				cout << "  Account:    " << tokens[0] << "   " << tokens[1] << "   " << tokens[2] << "   " << tokens[3] << "   " << tokens[4] << "   " << tokens[5] << endl << endl;
 			}
 		}
 	}
 
-	cout << "                              Type 1 to back: "; 
+	cout << "                              Type 1 to back: ";
 	while (!(cin >> choose))
 	{
 		cout << "\n                        Not an integer, please try again: "; cin >> choose;
@@ -357,17 +271,24 @@ void displayStudents()
 
 	switch (choose)
 	{
-	case 1: viewMenu();
+	case 1:
+		viewMenu();
 		break;
 	}
+	myFile.close();
 }
 
 void displayTeachers()
 {
 	ifstream myFile("teachers.txt");
-	STUDENT students;
 	int choose;
 	string line, tokens[7], help;
+
+	cout << "\n                    +------------------------------------------------------+" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    |                    List of teachers                  |" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    +------------------------------------------------------+" << endl << endl;
 
 	cout << "              Names:    Surnames:     Passwords:     Emails:" << endl << endl;
 
@@ -388,6 +309,7 @@ void displayTeachers()
 				{
 					help.erase(0, 1);
 				}
+
 				cout << "  Account:    " << tokens[0] << "   " << tokens[1] << "   " << tokens[2] << "   " << tokens[3] << endl << endl;
 			}
 		}
@@ -426,7 +348,7 @@ void displayParticularStudentsBackend()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                        Names:           Surnames:" << endl << endl;
+	cout << "\n                                            Names:           " << endl << endl;
 
 		if (myFile.is_open())
 		{
@@ -450,7 +372,7 @@ void displayParticularStudentsBackend()
 					{
 						if (tokens[7] == "notuse")
 						{
-							cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+							cout << "                             Account:    " << tokens[0] << endl << endl;
 						}
 					}
 				}
@@ -466,7 +388,7 @@ void displayParticularStudentsFrontend()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                        Names:           Surnames:" << endl << endl;
+	cout << "\n                                               Names:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -490,7 +412,7 @@ void displayParticularStudentsFrontend()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+						cout << "                              Account:    " << tokens[0] << endl << endl;
 					}
 				}
 			}
@@ -506,7 +428,7 @@ void displayParticularStudentsQA()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                        Names:           Surnames:" << endl << endl;
+	cout << "\n                                            Names:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -530,7 +452,7 @@ void displayParticularStudentsQA()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                           Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
+						cout << "                              Account:    " << tokens[0] << endl << endl;
 					}
 				}
 			}
@@ -546,7 +468,7 @@ void displayTeachersForTeams()
 	string line, tokens[7], help;
 
 	cout << "\n                          _________________________________________________________________" << endl;
-	cout << "                                       Names:       Surnames:  " << endl << endl;
+	cout << "                                              Names:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -565,7 +487,7 @@ void displayTeachersForTeams()
 				{
 					help.erase(0, 1);
 				} 
-				cout << "                            Account:    " << tokens[0] << "   " << tokens[1] << endl << endl;
+				cout << "                                Account:    " << tokens[0] << endl << endl;
 			}
 		}
 	}
@@ -573,10 +495,12 @@ void displayTeachersForTeams()
 	myFile.close();
 }
 
-void editUsername(string student) 
+void changeStudentsStatus(string& student) 
 {
-	fstream myfile("students.txt");
-	string tokens[10], help, newUsername;
+	ifstream myfile("students.txt");
+	ofstream tmpFile("studentsTmp.txt");
+	string tokens[10], status = "use";
+	bool userExist = false;
 
 	if (myfile.is_open())
 	{
@@ -586,14 +510,47 @@ void editUsername(string student)
 		{
 			getline(myfile, line);
 
-			if (line != "") {
+			if (line != "")
+			{
 				tokenize(line, tokens, ',');
 
-				if (tokens[0] == student) 
+				if (student != tokens[0])
 				{
-					tokens[7] = "use";
-					myfile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << endl;
+					if (tmpFile.is_open())
+					{
+						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << endl;
+					}
 				}
+				else
+				{
+					tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << status << "," << endl;
+					userExist = true;
+				}
+			}
+		}
+
+		if (!userExist)
+		{
+			cout << "                     This user doesn't exist, nothing happened" << endl;
+			myfile.close();
+			remove("students.txt");
+			tmpFile.close();
+			rename("studentsTmp.txt", "students.txt");
+		}
+		else
+		{
+			myfile.close();
+
+			if (remove("students.txt") != 0)
+			{
+				cerr << "                     A wild error appeared: ";
+			}
+
+			tmpFile.close();
+
+			if (rename("studentsTmp.txt", "students.txt") != 0)
+			{
+				cerr << "                     A wild error appeared : ";
 			}
 		}
 	}
@@ -601,7 +558,7 @@ void editUsername(string student)
 
 void deleteAccount() 
 {
-	ifstream myfile("students.txt");
+	fstream myfile("students.txt");
 	ofstream tmpFile("studentsTmp.txt");
 	string tokens[10], help;
 	int counter = 0, choice;
@@ -619,8 +576,8 @@ void deleteAccount()
 		{
 			getline(myfile, line);
 
-			if (line != "") {
-
+			if (line != "")
+			{
 				tokenize(line, tokens, ',');
 
 				if (help != tokens[0]) 
@@ -643,7 +600,6 @@ void deleteAccount()
 		char buff[256];
 
 		strerror_s(buff, 25);
-		cerr << "                  Error occur: " << buff << endl;
 
 		if (remove("students.txt") != 0) 
 		{
@@ -744,10 +700,12 @@ void editUsername()
 		{
 			myfile.close();
 
-			if (remove("students.txt") != 0) {
+			if (remove("students.txt") != 0) 
+			{
 				cerr << "                     A wild error appeared: ";
 			}
-			else {
+			else
+			{
 				cout << "\n                     Editing password 50% done!" << endl;
 			}
 
