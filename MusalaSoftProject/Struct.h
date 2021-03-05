@@ -25,6 +25,7 @@ struct TEAM
 	string teammatesBackend = "";
 	string teammatesFrontend = "";
 	string teammatesQA = "";
+	string scrumMaster = "";
 	string status = "";
 };
 

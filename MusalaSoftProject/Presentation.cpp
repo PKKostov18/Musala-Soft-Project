@@ -67,6 +67,8 @@ void mainMenu()
 
 void loginMenu()
 {
+    ofstream myfile;
+    myfile.open("currentAcc.txt", ios::out);
     STUDENT username, password, id;
     string result = "invalidAccount", result1 = "invalidAccount";
     char choice;
@@ -102,8 +104,11 @@ void loginMenu()
         cout << "                                     Enter your password: ";
         cin >> password.password;
         cout << endl;
+        
+        myfile << username.name;
+        myfile.close();
 
-        while (checkAccStudentsId(username) == false && checkAccTeachersId(username) == false && checkAccAdminId(username) == false)
+        while (checkAccStudentsId(username, password) == false && checkAccTeachersId(username, password) == false && checkAccAdminId(username, password) == false)
         {
             cout << "\n                       Invalid account, please try to login again!\n" << endl;
 
@@ -114,6 +119,7 @@ void loginMenu()
             cin >> password.password;
             cout << endl;
         } 
+        
     }
     else
     {
@@ -335,6 +341,7 @@ void scrumMasterMenu()
 
 void frontEndMenu()
 {
+    string line;
     int frontChoice;
 
     cout << "                    +------------------------------------------------------+" << endl;
@@ -352,7 +359,7 @@ void frontEndMenu()
     cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
-
+    
     cout << "                                   Enter your selection: "; 
     while (!(cin >> frontChoice))
     {
@@ -372,6 +379,7 @@ void frontEndMenu()
         }
     }
 
+    
 
     switch (frontChoice)
     {
@@ -671,25 +679,30 @@ void viewMenu()
         displayTeachers();
         break;
 
-    case 3:;
+    case 3:
+        system("cls");
+        displayTeams();
         break;
 
     case 4:
         break;
 
     case 9:
-        mainMenu();
+        system("cls");
+        adminMenu();
         break;
     }
 }
 
 void teamRegisterMenu()
 {
-    TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA, nameCheck;
-    string nothing;
+    TEAM name, description, date, teacher, studentBackend, studentFrontend, studentQA, studentScrum, status;
+    string nothing, line;
     ofstream myFile;
-    int choice;
+    ifstream myfile;
     myFile.open("team.txt", ios::app);
+    myfile.open("currentAcc.txt", ios::in);
+    int choice;
 
     system("cls");
 
@@ -744,7 +757,18 @@ void teamRegisterMenu()
     cout << "                                   Add a teacher to your team: ";
     cin >> teacher.teacher;
 
-    myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << endl;
+    if (myfile.is_open())
+    {
+        while (getline(myfile, line))
+        {
+            studentScrum.scrumMaster = line;
+        }
+        myfile.close();
+    }
+
+    status.status = "inuse";
+
+    myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << studentScrum.scrumMaster << "," << status.status << "," << endl;
     myFile.close();
 
     cout << "\n                                   Register successful!";
@@ -953,7 +977,7 @@ void manageAccountsMenu()
 
     case 2: 
         system("cls");
-        editUsername();
+        editPassword();
         break;
 
     case 9: 
