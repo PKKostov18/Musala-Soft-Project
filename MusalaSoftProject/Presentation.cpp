@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void mainMenu()
+void mainMenu() //a menu function for the main menu
 {
 	int choice;
 
@@ -34,17 +34,17 @@ void mainMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "\n                                   Enter your selection: "; 
-    while (!(cin >> choice))
+    while (!(cin >> choice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> choice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     
-    while (choice != 1 && choice != 2 && choice != 9)
+    while (choice != 1 && choice != 2 && choice != 9) //check if the input is in range
     {
         cout << "                       Invalid input, try again:"; 
-        while (!(cin >> choice))
+        while (!(cin >> choice)) //check if the value is integer
         { 
             cout << "\n                          Not an integer, try again: "; cin >> choice;
             cin.clear();
@@ -52,7 +52,7 @@ void mainMenu()
         }
     }
 	
-    switch (choice) 
+    switch (choice) //switch case for the choice 
     {
        case 1: loginMenu();
             break;
@@ -65,7 +65,7 @@ void mainMenu()
     }
 }
 
-void loginMenu()
+void loginMenu() //a menu function for the login
 {
     ofstream myfile;
     myfile.open("currentAcc.txt", ios::out);
@@ -79,12 +79,12 @@ void loginMenu()
     cout << "\n                                      Do you have an account?" << endl;
 	cout << "                                                 Y/N: "; cin >> choice;
 
-    while (choice != 'Y' && choice != 'N')
+    while (choice != 'Y' && choice != 'N') //check if the answer is in range (Y or N)
     {
         cout << "                                Invalid input, try again: "; cin >> choice;
     }
 
-    if (choice == 'Y')
+    if (choice == 'Y') //if the user have an account displays a menu for the user to log in
     {
         system("cls");
 
@@ -108,7 +108,7 @@ void loginMenu()
         myfile << username.name;
         myfile.close();
 
-        while (checkAccStudentsId(username, password) == false && checkAccTeachersId(username, password) == false && checkAccAdminId(username, password) == false)
+        while (checkAccStudentsId(username, password) == false && checkAccTeachersId(username, password) == false && checkAccAdminId(username, password) == false) //check if the account data is not valid
         {
             cout << "\n                       Invalid account, please try to login again!\n" << endl;
 
@@ -121,11 +121,11 @@ void loginMenu()
         } 
         
     }
-    else
+    else //if the user do not have an account
     {
         system("cls");
 
-        cout << "\n                        If you don't have an account, back to register!" << endl;
+        cout << "\n                        If you don't have an account, back to register!" << endl; 
 		cout << "                                         Type 1 to back: "; 
 		while (!(cin >> choose))
 		{
@@ -134,10 +134,10 @@ void loginMenu()
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 
-		while (choose != 1)
+		while (choose != 1) //check if the value is in range (1)
 		{
 			cout << "\n                             Invalid input, try again: "; 
-			while (!(cin >> choose))
+			while (!(cin >> choose)) //check if the value is integer
 			{
 				cout << "\n                     Not an integer, please try again: "; cin >> choose;
 				cin.clear();
@@ -153,7 +153,7 @@ void loginMenu()
     }
 }
 
-void registerMenu()
+void registerMenu() //a menu function for the registration
 {
     STUDENT username, password, surname, classname, email, role, id, status;
     string c_password;
@@ -168,17 +168,17 @@ void registerMenu()
     cout << "                                         2. Teacher " << endl;
     cout << "\n                                           Choose: "; 
 
-    while (!(cin >> choice))
+    while (!(cin >> choice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> choice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (choice != 1 && choice != 2)
+    while (choice != 1 && choice != 2) //check if the value is in range (1 or 2)
     {
         cout << "                          Invalid input, try again:";
-        while (!(cin >> choice))
+        while (!(cin >> choice)) //check if the value is integer
         {
             cout << "\n                            Not an integer, try again: "; cin >> choice;
             cin.clear();
@@ -186,7 +186,7 @@ void registerMenu()
         }
     }
 
-    if (choice == 1)
+    if (choice == 1) //if you choose to be a student register menu for students opens
     {
         system("cls");
 
@@ -200,38 +200,38 @@ void registerMenu()
         cout << "                    |                                                      |" << endl;
         cout << "                    +------------------------------------------------------+" << endl << endl;
 
-        cout << "                                   Enter your name: ";
+        cout << "                                   Enter your name: "; //registering your name
         cin >> username.name;
 
-        cout << "                                   Enter your surname: ";
+        cout << "                                   Enter your surname: "; //registering your surname
         cin >> username.surname;
 
         cout << "\n                      !!!Your password MUST be between 5 and 10 symbols!!!" << endl;
-        cout << "                                   Enter your password: ";
+        cout << "                                   Enter your password: "; //registering your password
         cin >> password.password;
 
-        while (password.password.length() > 10 || password.password.length() < 5)
+        while (password.password.length() > 10 || password.password.length() < 5) //check if the password is between 5 and 10 symbols
         {
             cout << "\n                           Invalid input, please try again: "; cin >> password.password;
         }
         cout << endl;
 
-        cout << "                                   Enter your class" << endl;
+        cout << "                                   Enter your class" << endl; //registering your class
         cout << "                                   Example - 10A: ";
         cin >> classname.classname;
 
         isClassnameValid(classname.classname);
 
-        cout << "                                   Enter your email: ";
+        cout << "                                   Enter your email: "; //registering your email
         cin >> email.email;
 
-        while (!isEmailValid(email.email.c_str()))
+        while (!isEmailValid(email.email.c_str())) //check if the email is valid
         {
             cout << "\n                           Invalid email, try again: "; cin >> email.email;
         }
         cout << endl;
 
-        cout << "                                Choose your role between:           " << endl << endl;
+        cout << "                                Choose your role between:           " << endl << endl; //choosing your role
         cout << "                                     1. Back-end                        " << endl;
         cout << "                                     2. Front-end                       " << endl;
         cout << "                                     3. Scrum Master                    " << endl;
@@ -240,25 +240,25 @@ void registerMenu()
         getline(cin, role.role);
         cout << endl;
 
-        while (role.role != "Back-end" && role.role != "Front-end" && role.role != "Scrum Master" && role.role != "QA engineer")
+        while (role.role != "Back-end" && role.role != "Front-end" && role.role != "Scrum Master" && role.role != "QA engineer") //check if the role is correct
         {
             cout << "                         Invalid input, please try again: "; getline(cin, role.role);
             cin.clear();
         }
 
-        if (role.role == "Scrum Master")
+        if (role.role == "Scrum Master") //if your role is scrum master your id changes to 0
         {
             id.id = "0";
         }
-        else if (role.role == "Front-end")
+        else if (role.role == "Front-end") //if your role is Front-end your id changes to 1
         {
             id.id = "1";
         }
-        else if (role.role == "Back-end")
+        else if (role.role == "Back-end") //if your role is Back-end your id changes to 2
         {
             id.id = "2";
         }
-        else if (role.role == "QA engineer")
+        else if (role.role == "QA engineer") //if your role is QA engineer your id changes to 3
         {
             id.id = "3";
         }
@@ -267,13 +267,13 @@ void registerMenu()
         myFile << username.name << "," << username.surname << "," << password.password << "," << classname.classname << "," << email.email << "," << role.role << "," << id.id << "," << status.status << "," << endl;
         myFile.close();
     }
-    else if (choice == 2)
+    else if (choice == 2) //if you choose to be a teacher register menu for teachers opens
     {
         teacherRegisterMenu();
     }
 }
 
-void scrumMasterMenu()
+void scrumMasterMenu() //a menu function for the scrum master role
 {
     int teamChoice;
 
@@ -297,17 +297,17 @@ void scrumMasterMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "\n                                   Enter your selection: "; 
-    while (!(cin >> teamChoice))
+    while (!(cin >> teamChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> teamChoice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 9)
+    while (teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 9) //check if the value in range (1,2,3 or 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> teamChoice))
+        while (!(cin >> teamChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> teamChoice;
             cin.clear();
@@ -316,7 +316,7 @@ void scrumMasterMenu()
     }
 
 
-    switch (teamChoice)
+    switch (teamChoice) //switch case for the scrum master choice 
     {
     case 1: 
         system("cls");
@@ -339,7 +339,7 @@ void scrumMasterMenu()
     }
 }
 
-void frontEndMenu()
+void frontEndMenu() //a menu function for the front-end role
 {
     string line;
     int frontChoice;
@@ -361,17 +361,17 @@ void frontEndMenu()
     cout << "                    +------------------------------------------------------+" << endl;
     
     cout << "                                   Enter your selection: "; 
-    while (!(cin >> frontChoice))
+    while (!(cin >> frontChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> frontChoice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (frontChoice != 1 && frontChoice != 2 && frontChoice != 3 && frontChoice != 9)
+    while (frontChoice != 1 && frontChoice != 2 && frontChoice != 3 && frontChoice != 9) //check if the value in range (1,2,3 or 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> frontChoice))
+        while (!(cin >> frontChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> frontChoice;
             cin.clear();
@@ -381,7 +381,7 @@ void frontEndMenu()
 
     
 
-    switch (frontChoice)
+    switch (frontChoice) //switch case for the front-end choice 
     {
     case 1:
         teamRegisterMenu();
@@ -393,7 +393,7 @@ void frontEndMenu()
     }
 }
 
-void backEndMenu()
+void backEndMenu()//a menu function for the back-end role
 {
     int backChoice;
 
@@ -414,17 +414,17 @@ void backEndMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "                                   Enter your selection: "; 
-    while (!(cin >> backChoice))
+    while (!(cin >> backChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> backChoice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (backChoice != 1 && backChoice != 2 && backChoice != 3 && backChoice != 9)
+    while (backChoice != 1 && backChoice != 2 && backChoice != 3 && backChoice != 9) //check if the value in range (1,2,3 or 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> backChoice))
+        while (!(cin >> backChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> backChoice;
             cin.clear();
@@ -433,7 +433,7 @@ void backEndMenu()
     }
 
 
-    switch (backChoice)
+    switch (backChoice) //switch case for the back-end choice 
     {
     case 1:;
         break;
@@ -444,7 +444,7 @@ void backEndMenu()
     }
 }
 
-void QAEngineerMenu()
+void QAEngineerMenu() //a menu function for the QA role
 {
     int QAChoice;
 
@@ -467,17 +467,17 @@ void QAEngineerMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "                                   Enter your selection: "; 
-    while (!(cin >> QAChoice))
+    while (!(cin >> QAChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> QAChoice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (QAChoice != 1 && QAChoice != 2 && QAChoice != 3 && QAChoice != 9)
+    while (QAChoice != 1 && QAChoice != 2 && QAChoice != 3 && QAChoice != 9) //check if the value in range (1,2,3 or 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> QAChoice))
+        while (!(cin >> QAChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> QAChoice;
             cin.clear();
@@ -486,7 +486,7 @@ void QAEngineerMenu()
     }
 
 
-    switch (QAChoice)
+    switch (QAChoice) //switch case for the QA choice 
     {
     case 1:;
         break;
@@ -500,7 +500,7 @@ void QAEngineerMenu()
     }
 }
 
-void teacherMenu()
+void teacherMenu()//a menu function for the teachers
 {
     int teacherChoice;
 
@@ -521,17 +521,17 @@ void teacherMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "                                   Enter your selection: "; 
-    while (!(cin >> teacherChoice))
+    while (!(cin >> teacherChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> teacherChoice;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (teacherChoice != 1 && teacherChoice != 9)
+    while (teacherChoice != 1 && teacherChoice != 9) //check if the value in range (1 or 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> teacherChoice))
+        while (!(cin >> teacherChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> teacherChoice;
             cin.clear();
@@ -540,7 +540,7 @@ void teacherMenu()
     }
 
 
-    switch (teacherChoice)
+    switch (teacherChoice) //switch case for the teacher choice 
     {
     case 1:;
         break;
@@ -551,7 +551,7 @@ void teacherMenu()
     }
 }
 
-void adminMenu()
+void adminMenu() //a menu function for the admin
 {
     int adminChoice;
 
@@ -577,7 +577,7 @@ void adminMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "\n                                   Enter your selection: "; 
-    while (!(cin >> adminChoice))
+    while (!(cin >> adminChoice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> adminChoice;
         cin.clear();
@@ -587,7 +587,7 @@ void adminMenu()
     while (adminChoice != 1 && adminChoice != 2 && adminChoice != 3 && adminChoice != 4 && adminChoice != 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> adminChoice))
+        while (!(cin >> adminChoice)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> adminChoice;
             cin.clear();
@@ -595,7 +595,7 @@ void adminMenu()
         }
     }
 
-    switch (adminChoice)
+    switch (adminChoice) //switch case for the admin choice  
     {
     case 1:
         system("cls");
@@ -649,7 +649,7 @@ void viewMenu()
     cout << "                    +------------------------------------------------------+" << endl;
 
     cout << "                                   Enter your selection: ";
-    while (!(cin >> viewChoose))
+    while (!(cin >> viewChoose)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> viewChoose;
         cin.clear();
@@ -659,7 +659,7 @@ void viewMenu()
     while (viewChoose != 1 && viewChoose != 2 && viewChoose != 3 && viewChoose != 4 && viewChoose != 9)
     {
         cout << "                       Invalid input, try again:";
-        while (!(cin >> viewChoose))
+        while (!(cin >> viewChoose)) //check if the value is integer
         {
             cout << "\n                          Not an integer, try again: "; cin >> viewChoose;
             cin.clear();
@@ -774,7 +774,7 @@ void teamRegisterMenu()
     cout << "\n                                   Register successful!";
     cout << "\n\n                                   Type 1 to back: "; 
 
-    while (!(cin >> choice))
+    while (!(cin >> choice)) //check if the value is integer
     {
         cout << "\n                       Not an integer, try again: "; cin >> choice;
         cin.clear();
@@ -784,7 +784,7 @@ void teamRegisterMenu()
     while (choice != 1)
     {
         cout << "                          Invalid input, try again:";
-        while (!(cin >> choice))
+        while (!(cin >> choice)) //check if the value is integer
         {  
             cout << "\n                            Not an integer, try again: "; cin >> choice;
             cin.clear();
@@ -902,7 +902,7 @@ void viewEmails()
     }
 
     cout << "                               Type 1 to back: ";
-    while (!(cin >> choose))
+    while (!(cin >> choose)) //check if the value is integer
     {
         cout << "\n                        Not an integer, please try again: "; cin >> choose;
         cin.clear();
@@ -912,7 +912,7 @@ void viewEmails()
     while (choose != 1)
     {
         cout << "\n                             Invalid input, try again: ";
-        while (!(cin >> choose))
+        while (!(cin >> choose)) //check if the value is integer
         {
             cout << "\n                     Not an integer, please try again: "; cin >> choose;
             cin.clear();
