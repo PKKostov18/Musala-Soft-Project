@@ -139,14 +139,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="adminData.h" />
+    <ClInclude Include="adminPresentation.h" />
+    <ClInclude Include="emails.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Presentation.h" />
+    <ClInclude Include="studentData.h" />
+    <ClInclude Include="studentPresentation.h" />
+    <ClInclude Include="teacherData.h" />
+    <ClInclude Include="teacherPresentation.h" />
+    <ClInclude Include="teamData.h" />
+    <ClInclude Include="teamPresentation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="adminData.cpp" />
+    <ClCompile Include="adminPresentation.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="emails.cpp" />
     <ClCompile Include="Presentation.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="studentData.cpp" />
+    <ClCompile Include="studentPresentaton.cpp" />
+    <ClCompile Include="teacherData.cpp" />
+    <ClCompile Include="teacherPresentation.cpp" />
+    <ClCompile Include="teamData.cpp" />
+    <ClCompile Include="teamPresentation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="admin.txt" />

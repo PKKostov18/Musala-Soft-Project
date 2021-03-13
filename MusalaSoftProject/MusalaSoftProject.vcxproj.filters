@@ -24,6 +24,33 @@
     <ClInclude Include="Presentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="studentData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="studentPresentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teacherData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teacherPresentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="emails.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teamData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teamPresentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="adminData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="adminPresentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp">
@@ -33,6 +60,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="studentPresentaton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teacherPresentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teamPresentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="emails.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="studentData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teacherData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teamData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="adminData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="adminPresentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
