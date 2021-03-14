@@ -55,11 +55,11 @@ bool checkAccAdminId(STUDENT& username, STUDENT& password)
 
 void deleteAccount()
 {
-	fstream myfile("students.txt");
+	ifstream myfile("students.txt");
 	ifstream myFile("team.txt");
 	ofstream tmpFile2("teamTmp.txt");
 	ofstream tmpFile("studentsTmp.txt");
-	fstream myfile1("teachers.txt");
+	ifstream myfile1("teachers.txt");
 	ofstream tmpFile1("teachersTmp.txt");
 	string tokens[10], help;
 	int counter = 0, choice, choose;
@@ -162,22 +162,22 @@ void deleteAccount()
 
 					if (help == tokens[3])
 					{
-						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << "missing" << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << "missing" << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
 						userExist = true;
 					}
 					else if (help == tokens[4])
 					{
-						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << "missing" << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << "missing" << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
 						userExist = true;
 					}
 					else if (help == tokens[5])
 					{
-						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << "missing" << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << "missing" << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
 						userExist = true;
 					}
 					else if (help == tokens[7])
 					{
-						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[4] << "," << tokens[6] << "," << "missing" << "," << tokens[8] << "," << endl;
+						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[4] << "," << tokens[6] << "," << "missing" << "," << tokens[8] << "," << endl;
 						userExist = true;
 					}
 				}
@@ -229,7 +229,7 @@ void deleteAccount()
 
 			while (!myfile1.eof())
 			{
-				getline(myfile, line);
+				getline(myfile1, line);
 
 				if (line != "")
 				{
@@ -239,8 +239,8 @@ void deleteAccount()
 					{
 						if (tmpFile1.is_open())
 						{
-							counter = 7;
-							tmpFile << tokens[counter] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << endl;
+							counter = 4;
+							tmpFile1 << tokens[counter] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << tokens[counter--] << "," << endl;
 						}
 					}
 					else
@@ -289,6 +289,52 @@ void deleteAccount()
 				cout << "\n                          Not an integer, try again: "; cin >> choice;
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+		}
+
+		if (myFile.is_open())
+		{
+			string line;
+
+			while (!myFile.eof())
+			{
+				getline(myFile, line);
+
+				if (line != "")
+				{
+					tokenize(line, tokens, ',');
+
+					if (help == tokens[6])
+					{
+						tmpFile2 << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << "missing" << "," << tokens[7] << "," << tokens[8] << "," << endl;
+						userExist = true;
+					}
+				}
+			}
+
+			if (!userExist)
+			{
+				cout << "                     This user doesn't exist, nothing happened" << endl;
+				myFile.close();
+				remove("team.txt");
+				tmpFile2.close();
+				rename("teamTmp.txt", "team.txt");
+			}
+			else
+			{
+				myFile.close();
+
+				if (remove("team.txt") != 0)
+				{
+					cerr << "\n                     Error! ";
+				}
+
+				tmpFile2.close();
+
+				if (rename("teamTmp.txt", "team.txt") != 0)
+				{
+					cerr << "\n                     Error! ";
+				}
 			}
 		}
 

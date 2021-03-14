@@ -4,6 +4,7 @@
 #include "Presentation.h"
 #include "teamData.h"
 #include "teamPresentation.h"
+#include "studentData.h"
 #include "emails.h"
 
 using namespace std;
@@ -26,9 +27,11 @@ void scrumMasterMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                    1. Create a team                  |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                    2. Check your team                |" << endl;
+    cout << "                    |                    2. Check for missing teammate     |" << endl;
     cout << "                    |                                                      |" << endl;
-    cout << "                    |                    3. Email to the admin             |" << endl;
+    cout << "                    |                    3. Check your team                |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                    4. Email to the admin             |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                    9. Log out                        |" << endl;
     cout << "                    |                                                      |" << endl;
@@ -42,7 +45,7 @@ void scrumMasterMenu()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 9)
+    while (teamChoice != 1 && teamChoice != 2 && teamChoice != 3 && teamChoice != 4 && teamChoice != 9)
     {
         cout << "                       Invalid input, try again:";
         while (!(cin >> teamChoice))
@@ -62,6 +65,11 @@ void scrumMasterMenu()
 
     case 2:
         system("cls");
+        checkForMissingMember();
+        break;
+
+    case 3:
+        system("cls");
         if (myfile.is_open())
         {
             while (getline(myfile, line))
@@ -72,7 +80,7 @@ void scrumMasterMenu()
         }
         break;
 
-    case 3:
+    case 4:
         system("cls");
         emailMenu();
         break;
@@ -102,6 +110,8 @@ void frontEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Check for missing teammate        |" << endl;
+    cout << "                    |                                                      |" << endl;
     cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
@@ -114,7 +124,7 @@ void frontEndMenu()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (frontChoice != 1 && frontChoice != 2 && frontChoice != 3 && frontChoice != 9)
+    while (frontChoice != 1 && frontChoice != 2 && frontChoice != 9)
     {
         cout << "                       Invalid input, try again:";
         while (!(cin >> frontChoice))
@@ -124,8 +134,6 @@ void frontEndMenu()
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
-
-
 
     switch (frontChoice)
     {
@@ -139,6 +147,11 @@ void frontEndMenu()
             }
             myfile.close();
         }
+        break;
+
+    case 2:
+        system("cls");
+        checkForMissingMember();
         break;
 
     case 9:
@@ -165,6 +178,8 @@ void backEndMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
+    cout << "                    |                 2. Check for missing teammate        |" << endl;
+    cout << "                    |                                                      |" << endl;
     cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    +------------------------------------------------------+" << endl;
@@ -177,7 +192,7 @@ void backEndMenu()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (backChoice != 1 && backChoice != 2 && backChoice != 3 && backChoice != 9)
+    while (backChoice != 1 && backChoice != 2 && backChoice != 9)
     {
         cout << "                       Invalid input, try again:";
         while (!(cin >> backChoice))
@@ -201,6 +216,11 @@ void backEndMenu()
             }
             myfile.close();
         }
+        break;
+
+    case 2:
+        system("cls");
+        checkForMissingMember();
         break;
 
     case 9:
@@ -228,6 +248,8 @@ void QAEngineerMenu()
     cout << "                    |                 1. Check your team                   |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 2. Report bugs                       |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                 3. Check for missing teammate        |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 9. Log out                           |" << endl;
     cout << "                    |                                                      |" << endl;
@@ -269,6 +291,11 @@ void QAEngineerMenu()
 
     case 2:
         system("cls");
+        break;
+
+    case 3:
+        system("cls");
+        checkForMissingMember();
         break;
 
     case 9:

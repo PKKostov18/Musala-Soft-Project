@@ -5,7 +5,6 @@
 #include "studentPresentation.h"
 #include "adminPresentation.h"
 
-
 using namespace std;
 
 void displayTeams()
@@ -107,21 +106,24 @@ void displayYourTeam(string name)
 					help.erase(0, 1);
 				}
 
-				if (tokens[3] == name)
+				if (tokens[8] == "inuse")
 				{
-					cout << "      " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
-				}
-				else if (tokens[4] == name)
-				{
-					cout << "       " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
-				}
-				else if (tokens[5] == name)
-				{
-					cout << "       " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
-				}
-				else if (tokens[7] == name)
-				{
-					cout << "       " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
+					if (tokens[3] == name)
+					{
+						cout << " Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
+					}
+					else if (tokens[4] == name)
+					{
+						cout << " Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
+					}
+					else if (tokens[5] == name)
+					{
+						cout << " Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
+					}
+					else if (tokens[7] == name)
+					{
+						cout << " Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
+					}
 				}
 			}
 		}

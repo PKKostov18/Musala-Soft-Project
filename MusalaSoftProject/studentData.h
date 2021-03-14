@@ -9,4 +9,6 @@ void displayStudents();
 void displayParticularStudentsBackend();
 void displayParticularStudentsFrontend();
 void displayParticularStudentsQA();
+void displayParticularStudentsBackend();
 void changeStudentsStatus(string student);
+void checkForMissingMember();
