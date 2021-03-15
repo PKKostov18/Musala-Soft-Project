@@ -5,7 +5,7 @@
 </p>
 <br>
 
-This is our project for MusalaSoft. We wrote 3090 lines of code.
+This is our project for MusalaSoft. 
 
 ## Our Team
 
