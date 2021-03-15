@@ -5,7 +5,7 @@
 </p>
 <br>
 
-This is our project for MusalaSoft. 
+TThis project is about making teams with students with a particular role with teachers to consult to them. On our program you have different options and permissions with the different roles. You can store different kind of information in text files like databases. For example, you can store your account information or team information and then to visualize them.
 
 ## Our Team
 
@@ -15,9 +15,9 @@ This is our project for MusalaSoft.
 
 ## Documentation, Presentation and Flowchart
 <br>
-<a href = >Документация () </a>
+<a href = >Документация (Documentation) </a>
 <br>
-<a href = https://codingburgas-my.sharepoint.com/:p:/g/personal/imyanev18_codingburgas_bg/EeghvPxzMBFIirE5mkXGqZsBobTM7bJib22lZ-lriNS3tg?e=gqJvUS> Презентация ()</a>
+<a href = https://codingburgas-my.sharepoint.com/:p:/g/personal/imyanev18_codingburgas_bg/EeghvPxzMBFIirE5mkXGqZsBobTM7bJib22lZ-lriNS3tg?e=gqJvUS> Презентация (Presentation)</a>
 <br>
-<a href = > Блок-схема () </a>
+<a href = > Блок-схема (Flowchart) </a>
 </center>
