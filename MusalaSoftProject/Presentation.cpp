@@ -225,7 +225,7 @@ void registerMenu() //a menu function for the registration
 
         isClassnameValid(classname.classname);
 
-        cout << "                                   Enter your email: "; //registering your email
+        cout << "\n                                   Enter your email: "; //registering your email
         cin >> email.email;
 
         while (!isEmailValid(email.email.c_str())) //check if the email is valid
@@ -235,19 +235,13 @@ void registerMenu() //a menu function for the registration
         cout << endl;
 
         cout << "                                Choose your role between:           " << endl << endl; //choosing your role
-        cout << "                                     1. Back-end                        " << endl;
-        cout << "                                     2. Front-end                       " << endl;
-        cout << "                                     3. Scrum Master                    " << endl;
-        cout << "                                     4. QA engineer                     " << endl;
-        cout << "                                   Type your choice: ";
-        getline(cin, role.role);
+        cout << "                                        Back-end                        " << endl;
+        cout << "                                        Front-end                       " << endl;
+        cout << "                                        Scrum Master                    " << endl;
+        cout << "                                        QA engineer                     " << endl;
+        cout << "\n                                   Type your choice: ";
+        getline(cin, role.role); getline(cin, role.role);
         cout << endl;
-
-        while (role.role != "Back-end" && role.role != "Front-end" && role.role != "Scrum Master" && role.role != "QA engineer") //check if the role is correct
-        {
-            cout << "                         Invalid input, please try again: "; getline(cin, role.role);
-            cin.clear();
-        }
 
         if (role.role == "Scrum Master") //if your role is scrum master your id changes to 0
         {
@@ -273,5 +267,30 @@ void registerMenu() //a menu function for the registration
     else if (choice == 2)
     {
         teacherRegisterMenu();
+    }
+
+    cout << "                                   Type 1 to back: ";
+    while (!(cin >> choose))
+    {
+        cout << "\n                        Not an integer, please try again: "; cin >> choose;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choose != 1)
+    {
+        cout << "\n                             Invalid input, try again: ";
+        while (!(cin >> choose))
+        {
+            cout << "\n                     Not an integer, please try again: "; cin >> choose;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choose)
+    {
+     case 1: mainMenu();
+        break;
     }
 }

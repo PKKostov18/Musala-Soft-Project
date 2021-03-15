@@ -3,14 +3,17 @@
 #include <fstream>
 #include "Data.h"
 #include "adminPresentation.h"
+#include "studentPresentation.h"
 
 using namespace std;
 
 void emailMenu()
 {
     ofstream myfile("email.txt", ios::app);
+    ifstream myFile("currentAcc.txt", ios::in);
     EMAIL name, description;
-    string nothing;
+    string nothing, line;
+    int choose;
 
     system("cls");
 
@@ -23,9 +26,49 @@ void emailMenu()
     getline(cin, nothing);
     cout << "\n                                 Enter your name: "; getline(cin, name.name);
 
+    if (myFile.is_open())
+    {
+        while (getline(myFile, line))
+        {
+        }
+        myFile.close();
+    }
+
+    while (line != name.name)
+    {
+        cout << "\n                         Invalid name, try again!"; getline(cin, name.name);
+    }
+
     cout << "\n                                 Enter a description: "; getline(cin, description.description);
 
     myfile << name.name << "," << description.description << "," << endl;
+
+    cout << "                              Type 1 to back: ";
+    while (!(cin >> choose))
+    {
+        cout << "\n                        Not an integer, please try again: "; cin >> choose;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choose != 1)
+    {
+        cout << "\n                             Invalid input, try again: ";
+        while (!(cin >> choose))
+        {
+            cout << "\n                     Not an integer, please try again: "; cin >> choose;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choose)
+    {
+    case 1:
+        system("cls");
+        scrumMasterMenu();
+        break;
+    }
 }
 
 void viewEmails()
@@ -86,7 +129,9 @@ void viewEmails()
 
     switch (choose)
     {
-    case 1: adminMenu();
+    case 1:
+        system("cls");
+        adminMenu();
         break;
     }
 }

@@ -5,6 +5,7 @@
 #include "emails.h"
 #include "adminData.h"
 #include "adminPresentation.h"
+#include "adminData.h"
 #include "studentData.h"
 #include "teacherData.h"
 #include "teamData.h"
@@ -119,7 +120,7 @@ void viewMenu()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    while (viewChoose != 1 && viewChoose != 2 && viewChoose != 3 && viewChoose != 4 && viewChoose != 9)
+    while (viewChoose != 1 && viewChoose != 2 && viewChoose != 3 && viewChoose != 4 && viewChoose != 5 && viewChoose != 9)
     {
         cout << "                       Invalid input, try again:";
         while (!(cin >> viewChoose))
@@ -154,6 +155,7 @@ void viewMenu()
 
     case 5:
         system("cls");
+        schoolInformationMenu();
         break;
 
     case 9:
@@ -211,14 +213,17 @@ void reports()
     {
     case 1:
         system("cls");
+        displayStudentsInParticularTeam();
         break;
 
     case 2:
         system("cls");
+        displayTeachersWithNoTeam();
         break;
 
     case 3:
         system("cls");
+        displayTeamsWithNotFullMembers();
         break;
 
     case 9:
@@ -351,6 +356,127 @@ void manageTeamsMenu()
     case 9:
         system("cls");
         adminMenu();
+        break;
+    }
+}
+
+void schoolInformationEntering()
+{
+    SCHOOL name, town, address;
+    string nothing;
+    int choose;
+    ofstream myFile;
+    myFile.open("school.txt", ios::out);
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   School information                 |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |            Please, enter the school data:            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl << endl;
+
+    getline(cin, nothing);
+    cout << "                                Enter the name of the school: "; 
+    getline(cin, name.name);
+
+    cout << "\n                                Enter the name of the town: ";
+    getline(cin, town.town);
+
+    cout << "\n                                Enter the address of the school: ";
+    getline(cin, address.address);
+
+    myFile << name.name << "," << town.town << "," << address.address << "," << endl;
+    myFile.close();
+    
+    cout << "\n                                   Type 1 to back: ";
+    while (!(cin >> choose))
+    {
+        cout << "\n                        Not an integer, please try again: "; cin >> choose;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choose != 1)
+    {
+        cout << "\n                             Invalid input, try again: ";
+        while (!(cin >> choose))
+        {
+            cout << "\n                     Not an integer, please try again: "; cin >> choose;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choose)
+    {
+    case 1:
+        system("cls");
+        schoolInformationMenu();
+        break;
+    }
+}
+
+void schoolInformationMenu()
+{
+    int choice;
+
+    system("cls");
+
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                  School information                  |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |     Please, select a option from the ones below:     |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   1. View the information            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   2. Enter the information           |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    |                   9. Back                            |" << endl;
+    cout << "                    |                                                      |" << endl;
+    cout << "                    +------------------------------------------------------+" << endl;
+
+    cout << "\n                                   Enter your selection: ";
+    while (!(cin >> choice))
+    {
+        cout << "\n                       Not an integer, try again: "; cin >> choice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    while (choice != 1 && choice != 2 && choice != 9)
+    {
+        cout << "                       Invalid input, try again:";
+        while (!(cin >> choice))
+        {
+            cout << "\n                          Not an integer, try again: "; cin >> choice;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+
+    switch (choice)
+    {
+    case 1:
+        system("cls");
+        viewSchoolInformation();
+        break;
+
+    case 2:
+        system("cls");
+        schoolInformationEntering();
+        break;
+
+    case 9:
+        system("cls");
+        viewMenu();
         break;
     }
 }

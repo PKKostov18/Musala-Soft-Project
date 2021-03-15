@@ -57,7 +57,7 @@ void displayTeachers()
 {
 	ifstream myFile("teachers.txt");
 	int choose;
-	string line, tokens[7], help;
+	string line, tokens[4], help;
 
 	cout << "\n                    +------------------------------------------------------+" << endl;
 	cout << "                    |                                                      |" << endl;
@@ -77,8 +77,7 @@ void displayTeachers()
 
 			help = tokens[0];
 
-			if (help == "") {}
-			else
+			if (help != "") 
 			{
 				if (help[0] == '\n')
 				{

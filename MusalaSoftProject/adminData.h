@@ -11,3 +11,7 @@ void deleteTeams();
 void editPassword();
 void editTeamName();
 void editTeamStatus();
+void displayStudentsInParticularTeam();
+void displayTeachersWithNoTeam();
+void displayTeamsWithNotFullMembers();
+void viewSchoolInformation();

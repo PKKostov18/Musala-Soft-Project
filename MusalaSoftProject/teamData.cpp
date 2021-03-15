@@ -31,8 +31,7 @@ void displayTeams()
 
 			help = tokens[0];
 
-			if (help == "") {}
-			else
+			if (help != "") 
 			{
 				if (help[0] == '\n')
 				{

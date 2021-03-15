@@ -4,6 +4,7 @@
 #include "Data.h"
 #include "adminData.h"
 #include "adminPresentation.h"
+#include "studentPresentation.h"
 #include "Struct.h"
 
 using namespace std;
@@ -659,7 +660,7 @@ void editTeamStatus()
 				{
 					if (tmpFile.is_open())
 					{
-						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
 					}
 				}
 				else
@@ -669,7 +670,14 @@ void editTeamStatus()
 
 					if (choose == 1)
 					{
-						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << status << "," << endl;
+						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << status << "," << endl;
+						teamExist = true;
+					}
+					else
+					{
+						cout << "                   Invalid input, try again: ";  cin >> choose;
+
+						tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << status << "," << endl;
 						teamExist = true;
 					}
 				}
@@ -729,5 +737,320 @@ void editTeamStatus()
 	{
 		system("cls");
 		manageTeamsMenu();
+	}
+}
+
+void displayStudentsInParticularTeam()
+{
+	ifstream myFile("team.txt");
+	string line, tokens[10], help, name;
+	int choose;
+
+	cout << "\n                   _________________________________________________________________" << endl;
+	cout << "\n                                         Name of the team: ";
+	cin >> name;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help != "")
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[0] == name)
+				{
+					cout << "\n                    +------------------------------------------------------+" << endl;
+					cout << "                    |                                                      |" << endl;
+					cout << "                    |                 Students in this team                |" << endl;
+					cout << "                    |                                                      |" << endl;
+					cout << "                    +------------------------------------------------------+" << endl << endl;
+
+					cout << "\n         Back-end            Front-end            QA engineer           Scrum Master" << endl;
+					cout << "\n         " << tokens[3] << "                   " << tokens[4] << "                " << tokens[5] << "                  " << tokens[7] << endl;
+				}
+				else
+				{
+					cout << "\n                            This team doesn't exist!" << endl;
+				}
+			}
+		}
+	}
+
+	cout << "                                   Type 1 to back: ";
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1:
+		system("cls");
+		reports();
+		break;
+	}
+	myFile.close();
+}
+
+void displayTeachersWithNoTeam()
+{
+	ifstream myFile("team.txt");
+	ifstream myFile1("teachers.txt");
+	string line, tokens[10], tokens1[10], help, help1;
+	int choose;
+
+	cout << "\n                    +------------------------------------------------------+" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    |               Teachers who dosent't have             |" << endl;
+	cout << "                    |                    allocated team                    |" << endl;
+	cout << "                    |                                                      |" << endl;
+	cout << "                    +------------------------------------------------------+" << endl << endl;
+
+	cout << "\n                                 Name:            Surname:    " << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help != "")
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (myFile1.is_open())
+				{
+					while (myFile1.good())
+					{
+						getline(myFile1, tokens1[0]);
+
+						tokenize(tokens1[0], tokens1, ',');
+
+						help1 = tokens1[0];
+
+						if (help1 != "")
+						{
+							if (help1[0] == '\n')
+							{
+								help1.erase(0, 1);
+							}
+
+							if (tokens1[0] != tokens[6])
+							{
+								cout << "\n                    Teacher:  " << tokens1[0] << "      " << tokens1[1] << endl;
+							}
+							else
+							{
+								cout << "                     There isn't teachers which don't participate in a team!" << endl;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	cout << "\n                                       Type 1 to back: ";
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1:
+		system("cls");
+		reports();
+		break;
+	}
+	myFile.close();
+}
+
+void displayTeamsWithNotFullMembers()
+{
+	ifstream myFile("team.txt");
+	string line, tokens[10], help, name;
+	int choose;
+
+	cout << "\n                           +------------------------------------------------------+" << endl;
+	cout << "                           |                                                      |" << endl;
+	cout << "                           |                    Not full teams                    |" << endl;
+	cout << "                           |                                                      |" << endl;
+	cout << "                           +------------------------------------------------------+" << endl << endl;
+
+	cout << "                 Names:         Backend:    Frontend:    QA engineer:   Teacher:   Scrum Master:  " << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help != "")
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				if (tokens[3] == "missing")
+				{
+					cout << "      Team:    " << tokens[0] << "      " << tokens[3] << "      " << tokens[4] << "           " << tokens[5] << "        " << tokens[6] << "        " << tokens[7] << endl << endl;
+				}
+				else if (tokens[4] == "missing")
+				{
+					cout << "      Team:    " << tokens[0] << "      " << tokens[3] << "      " << tokens[4] << "           " << tokens[5] << "        " << tokens[6] << "        " << tokens[7] << endl << endl;
+				}
+				else if (tokens[5] == "missing")
+				{
+					cout << "      Team:    " << tokens[0] << "      " << tokens[3] << "      " << tokens[4] << "           " << tokens[5] << "        " << tokens[6] << "        " << tokens[7] << endl << endl;
+				}
+				else if (tokens[7] == "missing")
+				{
+					cout << "      Team:    " << tokens[0] << "      " << tokens[3] << "      " << tokens[4] << "           " << tokens[5] << "        " << tokens[6] << "        " << tokens[7] << endl << endl;
+				}
+			}
+		}
+	}
+	myFile.close();
+
+	cout << "\n                                           Type 1 to back: ";
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1:
+		system("cls");
+		reports();
+		break;
+	}
+}
+
+void viewSchoolInformation()
+{
+	ifstream myFile("school.txt", ios::in);
+	string line, tokens[10], help;
+	int choose;
+
+	cout << "\n                           +------------------------------------------------------+" << endl;
+	cout << "                           |                                                      |" << endl;
+	cout << "                           |                    School information                |" << endl;
+	cout << "                           |                                                      |" << endl;
+	cout << "                           +------------------------------------------------------+" << endl << endl;
+
+	cout << "                                   Name:         Town:       Address:  " << endl << endl;
+
+	if (myFile.is_open())
+	{
+		while (myFile.good())
+		{
+			getline(myFile, tokens[0]);
+
+			tokenize(tokens[0], tokens, ',');
+
+			help = tokens[0];
+
+			if (help != "")
+			{
+				if (help[0] == '\n')
+				{
+					help.erase(0, 1);
+				}
+
+				cout << "                     School:    " << tokens[0] << "      " << tokens[1] << "      " << tokens[2] << endl << endl;
+
+			}
+		}
+	}
+	myFile.close();
+
+	cout << "\n                                           Type 1 to back: ";
+	while (!(cin >> choose))
+	{
+		cout << "\n                        Not an integer, please try again: "; cin >> choose;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	while (choose != 1)
+	{
+		cout << "\n                             Invalid input, try again: ";
+		while (!(cin >> choose))
+		{
+			cout << "\n                     Not an integer, please try again: "; cin >> choose;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	switch (choose)
+	{
+	case 1:
+		system("cls");
+		schoolInformationMenu();
+		break;
 	}
 }

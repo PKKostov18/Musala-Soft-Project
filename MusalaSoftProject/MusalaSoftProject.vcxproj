@@ -170,6 +170,7 @@
     <Text Include="admin.txt" />
     <Text Include="currentAcc.txt" />
     <Text Include="email.txt" />
+    <Text Include="school.txt" />
     <Text Include="students.txt" />
     <Text Include="teachers.txt" />
     <Text Include="team.txt" />

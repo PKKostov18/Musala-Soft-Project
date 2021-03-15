@@ -6,9 +6,10 @@ using namespace std;
 
 bool checkAccStudentsId(STUDENT& username, STUDENT& password);
 void displayStudents();
+bool checkAccExist(string name);
 void displayParticularStudentsBackend();
 void displayParticularStudentsFrontend();
 void displayParticularStudentsQA();
-void displayParticularStudentsBackend();
+void displayParticularStudentsScrumMaster();
 void changeStudentsStatus(string student);
-void checkForMissingMember();
+void checkForMissingMember(string name);

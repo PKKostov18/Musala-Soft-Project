@@ -65,7 +65,14 @@ void scrumMasterMenu()
 
     case 2:
         system("cls");
-        checkForMissingMember();
+        if (myfile.is_open())
+        {
+            while (getline(myfile, line))
+            {
+                checkForMissingMember(line);
+            }
+            myfile.close();
+        }
         break;
 
     case 3:
@@ -151,7 +158,14 @@ void frontEndMenu()
 
     case 2:
         system("cls");
-        checkForMissingMember();
+        if (myfile.is_open())
+        {
+            while (getline(myfile, line))
+            {
+                checkForMissingMember(line);
+            }
+            myfile.close();
+        }
         break;
 
     case 9:
@@ -220,7 +234,14 @@ void backEndMenu()
 
     case 2:
         system("cls");
-        checkForMissingMember();
+        if (myfile.is_open())
+        {
+            while (getline(myfile, line))
+            {
+                checkForMissingMember(line);
+            }
+            myfile.close();
+        }
         break;
 
     case 9:
@@ -246,8 +267,6 @@ void QAEngineerMenu()
     cout << "                    |                                                      |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 1. Check your team                   |" << endl;
-    cout << "                    |                                                      |" << endl;
-    cout << "                    |                 2. Report bugs                       |" << endl;
     cout << "                    |                                                      |" << endl;
     cout << "                    |                 3. Check for missing teammate        |" << endl;
     cout << "                    |                                                      |" << endl;
@@ -295,7 +314,14 @@ void QAEngineerMenu()
 
     case 3:
         system("cls");
-        checkForMissingMember();
+        if (myfile.is_open())
+        {
+            while (getline(myfile, line))
+            {
+                checkForMissingMember(line);
+            }
+            myfile.close();
+        }
         break;
 
     case 9:

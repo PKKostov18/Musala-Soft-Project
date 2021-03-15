@@ -91,9 +91,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="students.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="teachers.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -107,6 +104,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="team.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="students.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="school.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
