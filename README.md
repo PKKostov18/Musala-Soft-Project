@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/PKKostov18/Musala-Soft-Project/blob/main/Logo.png" width="350" height="350">  
+<img src="https://github.com/PKKostov18/Musala-Soft-Project/blob/main/Docs/Logo.png" width="350" height="350">  
   
 <h1 align="center">MusalaSoft project </h1>
 </p>
