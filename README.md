@@ -17,7 +17,7 @@ This is our project for MusalaSoft.
 <br>
 <a href = >Документация () </a>
 <br>
-<a href = > Презентация () </a>
+<a href = https://codingburgas-my.sharepoint.com/:p:/g/personal/imyanev18_codingburgas_bg/EeghvPxzMBFIirE5mkXGqZsBobTM7bJib22lZ-lriNS3tg?e=gqJvUS> Презентация ()</a>
 <br>
 <a href = > Блок-схема () </a>
 </center>
