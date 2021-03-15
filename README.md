@@ -19,5 +19,5 @@ TThis project is about making teams with students with a particular role with te
 <br>
 <a href = https://codingburgas-my.sharepoint.com/:p:/g/personal/imyanev18_codingburgas_bg/EeghvPxzMBFIirE5mkXGqZsBobTM7bJib22lZ-lriNS3tg?e=gqJvUS> Презентация (Presentation)</a>
 <br>
-<a href = > Блок-схема (Flowchart) </a>
+<a href = https://codingburgas-my.sharepoint.com/:i:/g/personal/pkkostov18_codingburgas_bg/EdPpORafXE9OokNHtu3aUj0B1xDfmCVaHYr5OEtVMPMBww?e=GC1mvC> Блок-схема (Flowchart) </a>
 </center>
