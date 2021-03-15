@@ -5,7 +5,14 @@
 </p>
 <br>
 
+## Topic
+
 TThis project is about making teams with students with a particular role with teachers to consult to them. On our program you have different options and permissions with the different roles. You can store different kind of information in text files like databases. For example, you can store your account information or team information and then to visualize them.
+
+## Used technologies
+
+#### C++
+#### Visual Studio 2019
 
 ## Our Team
 
