@@ -17,14 +17,14 @@ void teamRegisterMenu()
     myFile.open("team.txt", ios::app);
     myfile.open("currentAcc.txt", ios::in);
     int choice;
-   
+
     system("cls");
 
     if (myfile.is_open())
     {
         while (getline(myfile, line))
         {
-            name1 = line;
+            studentScrum.scrumMaster = line;
         }
         myfile.close();
     }
@@ -45,12 +45,12 @@ void teamRegisterMenu()
                 {
                     help.erase(0, 1);
                 }
-                    
-                if (tokens[7] == name1)
+
+                if (tokens[7] == studentScrum.scrumMaster)
                 {
                     if (tokens[8] == "inuse")
                     {
-                        cout << "\n                              You alreafy have a team!" << endl;
+                        cout << "\n                              You already have a team!" << endl;
                         cout << "\n             Send a message to the admin to edit the team status to not active!" << endl;
                         cout << "\n                                  Type 1 to back: ";
 
@@ -126,8 +126,11 @@ void teamRegisterMenu()
                         cout << endl;
 
                         displayTeachersForTeams();
-                        cout << "                                   Add a teacher to your team: ";
-                        cin >> teacher.teacher;
+                        cout << "\n                                   Add a teacher to your team! " << endl;
+                        cout << "                                   Enter the name and the surname: ";
+
+                        getline(cin, teacher.teacher);
+                        getline(cin, teacher.teacher);
 
                         if (myfile.is_open())
                         {
@@ -140,7 +143,7 @@ void teamRegisterMenu()
 
                         status.status = "inuse";
 
-                        myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << studentScrum.scrumMaster << "," << status.status << "," << endl;
+                        myFile << name.name << "," << description.description << "," << date.date << "," << studentBackend.teammatesBackend << "," << studentFrontend.teammatesFrontend << "," << studentQA.teammatesQA << "," << teacher.teacher << "," << studentScrum.scrumMaster << status.status << "," << endl;
                         myFile.close();
 
                         cout << "\n                                   Register successful!";
@@ -223,8 +226,11 @@ void teamRegisterMenu()
                     cout << endl;
 
                     displayTeachersForTeams();
-                    cout << "                                   Add a teacher to your team: ";
-                    cin >> teacher.teacher;
+                    cout << "\n                                   Add a teacher to your team! " << endl;
+                    cout << "                                   Enter the name and the surname: ";
+
+                    getline(cin, teacher.teacher);
+                    getline(cin, teacher.teacher);
 
                     if (myfile.is_open())
                     {

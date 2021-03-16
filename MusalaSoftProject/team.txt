@@ -1,3 +1,2 @@
-FaZe,project for school,15.03.2021,plamen,ivan,kaloyan,Petur,hristo,inuse,
-ZaFe,programming project,16.03.2021,stoyan,jelqzko,raq,Danaila,inuse,
-CodeTeam,coding team for school project,16.03.2021,kristian,krasiyana,simeon,Mila,inuse,
+FaZeCode,musalasoft project,14.02.2020,Plamen,Jelqzko,Raq,Petur Georgiev,Stanislav,inuse,
+SchoolCodes,algorith project,11.02.2019,Stoyan,Krasiyana,Atanas,Daniela Kirova,Kaloyan,inuse,

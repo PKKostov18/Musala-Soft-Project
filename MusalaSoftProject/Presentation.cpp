@@ -72,7 +72,7 @@ void loginMenu() //a menu function for the login
 {
     ofstream myfile;
     myfile.open("currentAcc.txt", ios::out);
-    STUDENT username, password, id;
+    STUDENT name, surname, password, id;
     string result = "invalidAccount", result1 = "invalidAccount";
     char choice;
     int choose;
@@ -80,7 +80,7 @@ void loginMenu() //a menu function for the login
     system("cls");
 
     cout << "\n                                      Do you have an account?" << endl;
-	cout << "                                                 Y/N: "; cin >> choice;
+	cout << "\n                                                 Y/N: "; cin >> choice;
 
     while (choice != 'Y' && choice != 'N') //check if the answer is in range (Y or N)
     {
@@ -102,21 +102,27 @@ void loginMenu() //a menu function for the login
         cout << "                    +------------------------------------------------------+" << endl << endl;
 
         cout << "                                     Enter your name: ";
-        cin >> username.name;
+        cin >> name.name;
+        cout << endl;
+        cout << "                                     Enter your surname: ";
+        cin >> surname.surname;
         cout << endl;
         cout << "                                     Enter your password: ";
         cin >> password.password;
         cout << endl;
         
-        myfile << username.name;
+        myfile << name.name;
         myfile.close();
 
-        while (checkAccStudentsId(username, password) == false && checkAccTeachersId(username, password) == false && checkAccAdminId(username, password) == false) //check if the account data is not valid
+        while (checkAccStudentsId(name, surname, password) == false && checkAccTeachersId(name, surname, password) == false && checkAccAdminId(name, surname, password) == false) //check if the account data is not valid
         {
             cout << "\n                       Invalid account, please try to login again!\n" << endl;
 
             cout << "                                     Enter your name: ";
-            cin >> username.name;
+            cin >> name.name;
+            cout << endl;
+            cout << "                                     Enter your name: ";
+            cin >> surname.surname;
             cout << endl;
             cout << "                                     Enter your password: ";
             cin >> password.password;
@@ -181,7 +187,7 @@ void registerMenu() //a menu function for the registration
     while (choice != 1 && choice != 2) //check if the value is in range (1 or 2)
     {
         cout << "                          Invalid input, try again:";
-        while (!(cin >> choice)) //check if the value is integer
+        while (!(cin >> choice))
         {
             cout << "\n                            Not an integer, try again: "; cin >> choice;
             cin.clear();
@@ -203,29 +209,29 @@ void registerMenu() //a menu function for the registration
         cout << "                    |                                                      |" << endl;
         cout << "                    +------------------------------------------------------+" << endl << endl;
 
-        cout << "                                   Enter your name: "; //registering your name
+        cout << "                                   Enter your name: ";
         cin >> username.name;
 
-        cout << "                                   Enter your surname: "; //registering your surname
+        cout << "                                   Enter your surname: ";
         cin >> username.surname;
 
         cout << "\n                      !!!Your password MUST be between 5 and 10 symbols!!!" << endl;
-        cout << "                                   Enter your password: "; //registering your password
+        cout << "                                   Enter your password: ";
         cin >> password.password;
 
-        while (password.password.length() > 10 || password.password.length() < 5) //check if the password is between 5 and 10 symbols
+        while (password.password.length() > 10 || password.password.length() < 5) 
         {
             cout << "\n                           Invalid input, please try again: "; cin >> password.password;
         }
         cout << endl;
 
-        cout << "                                   Enter your class" << endl; //registering your class
+        cout << "                                   Enter your class" << endl; 
         cout << "                                   Example - 10A: ";
         cin >> classname.classname;
 
         isClassnameValid(classname.classname);
 
-        cout << "\n                                   Enter your email: "; //registering your email
+        cout << "\n                                   Enter your email: "; 
         cin >> email.email;
 
         while (!isEmailValid(email.email.c_str())) //check if the email is valid
@@ -234,7 +240,7 @@ void registerMenu() //a menu function for the registration
         }
         cout << endl;
 
-        cout << "                                Choose your role between:           " << endl << endl; //choosing your role
+        cout << "                                Choose your role between:           " << endl << endl; 
         cout << "                                        Back-end                        " << endl;
         cout << "                                        Front-end                       " << endl;
         cout << "                                        Scrum Master                    " << endl;

@@ -106,10 +106,10 @@
     <Text Include="team.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="students.txt">
+    <Text Include="school.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="school.txt">
+    <Text Include="students.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-bool checkAccStudentsId(STUDENT& username, STUDENT& password)
+bool checkAccStudentsId(STUDENT& name, STUDENT& surname, STUDENT& password)
 {
 	ifstream myFile("students.txt");
 	string line, tokens[10], help;
@@ -34,35 +34,39 @@ bool checkAccStudentsId(STUDENT& username, STUDENT& password)
 				{
 					help.erase(0, 1);
 				}
-				if (username.name == tokens[0])
+
+				if (name.name == tokens[0])
 				{
-					if (password.password == tokens[2])
+					if (surname.surname == tokens[1])
 					{
-						if (tokens[0] == username.name)
+						if (password.password == tokens[2])
 						{
-							if (tokens[6] == "0")
+							if (tokens[0] == name.name)
 							{
-								system("cls");
-								scrumMasterMenu();
-								return true;
-							}
-							else if (tokens[6] == "1")
-							{
-								system("cls");
-								frontEndMenu();
-								return true;
-							}
-							else if (tokens[6] == "2")
-							{
-								system("cls");
-								backEndMenu();
-								return true;
-							}
-							else if (tokens[6] == "3")
-							{
-								system("cls");
-								QAEngineerMenu();
-								return true;
+								if (tokens[6] == "0")
+								{
+									system("cls");
+									scrumMasterMenu();
+									return true;
+								}
+								else if (tokens[6] == "1")
+								{
+									system("cls");
+									frontEndMenu();
+									return true;
+								}
+								else if (tokens[6] == "2")
+								{
+									system("cls");
+									backEndMenu();
+									return true;
+								}
+								else if (tokens[6] == "3")
+								{
+									system("cls");
+									QAEngineerMenu();
+									return true;
+								}
 							}
 						}
 					}
@@ -76,7 +80,7 @@ bool checkAccStudentsId(STUDENT& username, STUDENT& password)
 
 void displayStudents()
 {
-	ifstream myFile("students.txt", ios::in);
+	ifstream myFile("students.txt");
 	int choose;
 	string line, tokens[6], help;
 
@@ -178,7 +182,7 @@ void displayParticularStudentsBackend()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                            Names:           " << endl << endl;
+	cout << "\n                                                  Names:     " << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -202,7 +206,7 @@ void displayParticularStudentsBackend()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                             Account:    " << tokens[0] << endl << endl;
+						cout << "                                Account:     " << tokens[0] << endl << endl;
 					}
 				}
 			}
@@ -218,7 +222,7 @@ void displayParticularStudentsFrontend()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                               Names:" << endl << endl;
+	cout << "\n                                                    Names: " << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -242,7 +246,7 @@ void displayParticularStudentsFrontend()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                              Account:    " << tokens[0] << endl << endl;
+						cout << "                                   Account:    " << tokens[0]  << endl << endl;
 					}
 				}
 			}
@@ -258,7 +262,7 @@ void displayParticularStudentsQA()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                            Names:" << endl << endl;
+	cout << "\n                                                   Names:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -282,7 +286,7 @@ void displayParticularStudentsQA()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                              Account:    " << tokens[0] << endl << endl;
+						cout << "                                   Account:    " << tokens[0] << endl << endl;
 					}
 				}
 			}
@@ -298,7 +302,7 @@ void displayParticularStudentsScrumMaster()
 	string line, tokens[10], help;
 
 	cout << "\n                          _________________________________________________________________";
-	cout << "\n                                            Names:           " << endl << endl;
+	cout << "\n                                                    Names:   " << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -322,7 +326,7 @@ void displayParticularStudentsScrumMaster()
 				{
 					if (tokens[7] == "notuse")
 					{
-						cout << "                             Account:    " << tokens[0] << endl << endl;
+						cout << "                                  Account:    " << tokens[0] << endl << endl;
 					}
 				}
 			}
@@ -337,8 +341,9 @@ void checkForMissingMember(string name)
 	int choice;
 	ifstream myfile("team.txt");
 	ifstream myfile1("students.txt");
+	ifstream myfile2("currentAcc.txt", ios::in);
 	ofstream tmpFile("teamTmp.txt");
-	string line, tokens[10], help;
+	string line, tokens[10], help, currentUser;
 	bool userExist = false;
 
 	cout << "\n                            +------------------------------------------------------+" << endl;
@@ -348,6 +353,15 @@ void checkForMissingMember(string name)
 	cout << "                            +------------------------------------------------------+" << endl << endl;
 
 	cout << "\n        Name:          Description:        Backend:     Frontend:     QA engineer:     Teacher:     Scrum Master:" << endl << endl;
+
+	if (myfile2.is_open())
+	{
+		while (getline(myfile2, line))
+		{
+			currentUser = line;
+		}
+		myfile2.close();
+	}
 
 	if (myfile.is_open())
 	{
@@ -361,304 +375,307 @@ void checkForMissingMember(string name)
 
 			if (help != "")
 			{
-				if (tokens[8] == "inuse")
+				if (currentUser == tokens[7])
 				{
-					cout << "  Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
-
-					if (tokens[3] == "missing")
+					if (tokens[8] == "inuse")
 					{
-						displayParticularStudentsBackend();
-						cout << "\n\n                                  Add new Back-end student to your team: "; cin >> help;
+						cout << "  Team: " << tokens[0] << "       " << tokens[1] << "      " << tokens[3] << "         " << tokens[4] << "         " << tokens[5] << "          " << tokens[6] << "          " << tokens[7] << endl << endl;
 
-						if (myfile.is_open())
+						if (tokens[3] == "missing")
 						{
-							string line;
+							displayParticularStudentsBackend();
+							cout << "\n\n                                  Add new Back-end student to your team: "; cin >> help;
 
-							while (!myfile.eof())
+							if (myfile.is_open())
 							{
-								getline(myfile, line);
+								string line;
 
-								if (line != "")
+								while (!myfile.eof())
 								{
-									tokenize(line, tokens, ',');
+									getline(myfile, line);
 
-									if (!checkAccExist(help))
+									if (line != "")
 									{
-										if (tmpFile.is_open())
+										tokenize(line, tokens, ',');
+
+										if (!checkAccExist(help))
 										{
-											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											if (tmpFile.is_open())
+											{
+												tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											}
+										}
+										else
+										{
+											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << help << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											userExist = true;
 										}
 									}
-									else
+								}
+
+								if (!userExist)
+								{
+									cout << "                     This user doesn't exist, nothing happened" << endl;
+									myfile.close();
+									remove("team.txt");
+									tmpFile.close();
+									rename("teamTmp.txt", "team.txt");
+								}
+								else
+								{
+									myfile.close();
+
+									if (remove("team.txt") != 0)
 									{
-										tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << help << "," << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
-										userExist = true;
+										cerr << "\n                     Error! ";
 									}
-								}
-							}
 
-							if (!userExist)
-							{
-								cout << "                     This user doesn't exist, nothing happened" << endl;
-								myfile.close();
-								remove("team.txt");
-								tmpFile.close();
-								rename("teamTmp.txt", "team.txt");
-							}
-							else
-							{
-								myfile.close();
+									tmpFile.close();
 
-								if (remove("team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
-								}
-
-								tmpFile.close();
-
-								if (rename("teamTmp.txt", "team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
+									if (rename("teamTmp.txt", "team.txt") != 0)
+									{
+										cerr << "\n                     Error! ";
+									}
 								}
 							}
 						}
-					}
-					else if (tokens[4] == "missing")
-					{
-						displayParticularStudentsFrontend();
-						cout << "\n\n                                          Add new Front-end student to your team: "; cin >> help;
-
-						if (myfile.is_open())
+						else if (tokens[4] == "missing")
 						{
-							string line;
+							displayParticularStudentsFrontend();
+							cout << "\n\n                                          Add new Front-end student to your team: "; cin >> help;
 
-							while (!myfile.eof())
+							if (myfile.is_open())
 							{
-								getline(myfile, line);
+								string line;
 
-								if (line != "")
+								while (!myfile.eof())
 								{
-									tokenize(line, tokens, ',');
+									getline(myfile, line);
 
-									if (!checkAccExist(help))
+									if (line != "")
 									{
-										if (tmpFile.is_open())
+										tokenize(line, tokens, ',');
+
+										if (!checkAccExist(help))
 										{
-											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											if (tmpFile.is_open())
+											{
+												tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											}
+										}
+										else
+										{
+											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << help << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											userExist = true;
 										}
 									}
-									else
+								}
+
+								if (!userExist)
+								{
+									cout << "                     This user doesn't exist, nothing happened" << endl;
+									myfile.close();
+									remove("team.txt");
+									tmpFile.close();
+									rename("teamTmp.txt", "team.txt");
+								}
+								else
+								{
+									myfile.close();
+
+									if (remove("team.txt") != 0)
 									{
-										tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << help << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
-										userExist = true;
+										cerr << "\n                     Error! ";
 									}
-								}
-							}
 
-							if (!userExist)
-							{
-								cout << "                     This user doesn't exist, nothing happened" << endl;
-								myfile.close();
-								remove("team.txt");
-								tmpFile.close();
-								rename("teamTmp.txt", "team.txt");
-							}
-							else
-							{
-								myfile.close();
+									tmpFile.close();
 
-								if (remove("team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
-								}
-
-								tmpFile.close();
-
-								if (rename("teamTmp.txt", "team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
+									if (rename("teamTmp.txt", "team.txt") != 0)
+									{
+										cerr << "\n                     Error! ";
+									}
 								}
 							}
 						}
-					}
-					else if (tokens[5] == "missing")
-					{	
-						displayParticularStudentsQA();
-						cout << "\n\n                                     Add new QA engineer student to your team: "; cin >> help;
-
-						if (myfile.is_open())
+						else if (tokens[5] == "missing")
 						{
-							string line;
+							displayParticularStudentsQA();
+							cout << "\n\n                                     Add new QA engineer student to your team: "; cin >> help;
 
-							while (!myfile.eof())
+							if (myfile.is_open())
 							{
-								getline(myfile, line);
+								string line;
 
-								if (line != "")
+								while (!myfile.eof())
 								{
-									tokenize(line, tokens, ',');
+									getline(myfile, line);
 
-									if (!checkAccExist(help))
+									if (line != "")
 									{
-										if (tmpFile.is_open())
+										tokenize(line, tokens, ',');
+
+										if (!checkAccExist(help))
 										{
-											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											if (tmpFile.is_open())
+											{
+												tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											}
+										}
+										else
+										{
+											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << help << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											userExist = true;
 										}
 									}
-									else
+								}
+
+								if (!userExist)
+								{
+									cout << "                     This user doesn't exist, nothing happened" << endl;
+									myfile.close();
+									remove("team.txt");
+									tmpFile.close();
+									rename("teamTmp.txt", "team.txt");
+								}
+								else
+								{
+									myfile.close();
+
+									if (remove("team.txt") != 0)
 									{
-										tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << help << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
-										userExist = true;
+										cerr << "\n                     Error! ";
 									}
-								}
-							}
 
-							if (!userExist)
-							{
-								cout << "                     This user doesn't exist, nothing happened" << endl;
-								myfile.close();
-								remove("team.txt");
-								tmpFile.close();
-								rename("teamTmp.txt", "team.txt");
-							}
-							else
-							{
-								myfile.close();
+									tmpFile.close();
 
-								if (remove("team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
-								}
-
-								tmpFile.close();
-
-								if (rename("teamTmp.txt", "team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
+									if (rename("teamTmp.txt", "team.txt") != 0)
+									{
+										cerr << "\n                     Error! ";
+									}
 								}
 							}
 						}
-					}
-					else if (tokens[7] == "missing")
-					{
-						displayParticularStudentsScrumMaster();
-						cout << "\n\n                                       Add new Scrum Master student to your team: "; cin >> help;
-
-						if (myfile.is_open())
+						else if (tokens[7] == "missing")
 						{
-							string line;
+							displayParticularStudentsScrumMaster();
+							cout << "\n\n                                       Add new Scrum Master student to your team: "; cin >> help;
 
-							while (!myfile.eof())
+							if (myfile.is_open())
 							{
-								getline(myfile, line);
+								string line;
 
-								if (line != "")
+								while (!myfile.eof())
 								{
-									tokenize(line, tokens, ',');
+									getline(myfile, line);
 
-									if (!checkAccExist(help))
+									if (line != "")
 									{
-										if (tmpFile.is_open())
+										tokenize(line, tokens, ',');
+
+										if (!checkAccExist(help))
 										{
-											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											if (tmpFile.is_open())
+											{
+												tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											}
+										}
+										else
+										{
+											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << help << "," << tokens[8] << "," << endl;
+											userExist = true;
 										}
 									}
-									else
+								}
+
+								if (!userExist)
+								{
+									cout << "                     This user doesn't exist, nothing happened" << endl;
+									myfile.close();
+									remove("team.txt");
+									tmpFile.close();
+									rename("teamTmp.txt", "team.txt");
+								}
+								else
+								{
+									myfile.close();
+
+									if (remove("team.txt") != 0)
 									{
-										tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << help << "," << tokens[8] << "," << endl;
-										userExist = true;
+										cerr << "\n                     Error! ";
 									}
-								}
-							}
 
-							if (!userExist)
-							{
-								cout << "                     This user doesn't exist, nothing happened" << endl;
-								myfile.close();
-								remove("team.txt");
-								tmpFile.close();
-								rename("teamTmp.txt", "team.txt");
-							}
-							else
-							{
-								myfile.close();
+									tmpFile.close();
 
-								if (remove("team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
-								}
-
-								tmpFile.close();
-
-								if (rename("teamTmp.txt", "team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
+									if (rename("teamTmp.txt", "team.txt") != 0)
+									{
+										cerr << "\n                     Error! ";
+									}
 								}
 							}
 						}
-					}
-					else if (tokens[6] == "missing")
-					{
-						displayTeachersForTeams();
-						cout << "\n\n                                          Add new teacher to your team: "; cin >> help;
-
-						if (myfile.is_open())
+						else if (tokens[6] == "missing")
 						{
-							string line;
+							displayTeachersForTeams();
+							cout << "\n\n                                          Add new teacher to your team: "; cin >> help;
 
-							while (!myfile.eof())
+							if (myfile.is_open())
 							{
-								getline(myfile, line);
+								string line;
 
-								if (line != "")
+								while (!myfile.eof())
 								{
-									tokenize(line, tokens, ',');
+									getline(myfile, line);
 
-									if (!checkAccExist(help))
+									if (line != "")
 									{
-										if (tmpFile.is_open())
+										tokenize(line, tokens, ',');
+
+										if (!checkAccExist(help))
 										{
-											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											if (tmpFile.is_open())
+											{
+												tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << tokens[6] << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											}
+										}
+										else
+										{
+											tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << help << "," << tokens[7] << "," << tokens[8] << "," << endl;
+											userExist = true;
 										}
 									}
-									else
+								}
+
+								if (!userExist)
+								{
+									cout << "                     This user doesn't exist, nothing happened" << endl;
+									myfile.close();
+									remove("team.txt");
+									tmpFile.close();
+									rename("teamTmp.txt", "team.txt");
+								}
+								else
+								{
+									myfile.close();
+
+									if (remove("team.txt") != 0)
 									{
-										tmpFile << tokens[0] << "," << tokens[1] << "," << tokens[2] << "," << tokens[3] << " " << tokens[4] << "," << tokens[5] << "," << help << "," << tokens[7] << "," << tokens[8] << "," << endl;
-										userExist = true;
+										cerr << "\n                     Error! ";
 									}
-								}
-							}
 
-							if (!userExist)
-							{
-								cout << "                     This user doesn't exist, nothing happened" << endl;
-								myfile.close();
-								remove("team.txt");
-								tmpFile.close();
-								rename("teamTmp.txt", "team.txt");
-							}
-							else
-							{
-								myfile.close();
+									tmpFile.close();
 
-								if (remove("team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
-								}
-
-								tmpFile.close();
-
-								if (rename("teamTmp.txt", "team.txt") != 0)
-								{
-									cerr << "\n                     Error! ";
+									if (rename("teamTmp.txt", "team.txt") != 0)
+									{
+										cerr << "\n                     Error! ";
+									}
 								}
 							}
 						}
-					}
-					else
-					{
-						cout << "\n                                                     Your team is fine!" << endl;
-						cout << "                                             You don't miss member of your team!" << endl;
+						else
+						{
+							cout << "\n                                                     Your team is fine!" << endl;
+							cout << "                                             You don't miss member of your team!" << endl;
+						}
 					}
 				}
 			}

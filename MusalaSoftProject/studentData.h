@@ -4,7 +4,7 @@
 #include "Struct.h"
 using namespace std;
 
-bool checkAccStudentsId(STUDENT& username, STUDENT& password);
+bool checkAccStudentsId(STUDENT& name, STUDENT& surname, STUDENT& password);
 void displayStudents();
 bool checkAccExist(string name);
 void displayParticularStudentsBackend();

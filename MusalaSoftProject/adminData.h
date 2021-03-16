@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool checkAccAdminId(STUDENT& username, STUDENT& password);
+bool checkAccAdminId(STUDENT& name, STUDENT& surname, STUDENT& password);
 void deleteAccount();
 void deleteTeams();
 void editPassword();

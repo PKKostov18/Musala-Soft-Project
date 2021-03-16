@@ -1,2 +1,3 @@
-Kaloyan,iskam da si smenq imeto na moq otbor,
-Hristo,Imam problem s kalata,
+Kaloyan,I want to change my team name to SuperCode,
+Hristo,Set my team status to not active,
+Stanislav,I want to change my password to pass11,

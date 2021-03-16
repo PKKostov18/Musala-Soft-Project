@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool checkAccTeachersId(STUDENT& username, STUDENT& password)
+bool checkAccTeachersId(STUDENT& name, STUDENT& surname, STUDENT& password)
 {
 	ifstream myFile("teachers.txt");
 	string line, tokens[10], help;
@@ -31,17 +31,20 @@ bool checkAccTeachersId(STUDENT& username, STUDENT& password)
 					help.erase(0, 1);
 				}
 
-				if (username.name == tokens[0])
+				if (name.name == tokens[0])
 				{
-					if (password.password == tokens[2])
+					if (surname.surname == tokens[1])
 					{
-						if (tokens[0] == username.name)
+						if (password.password == tokens[2])
 						{
-							if (tokens[4] == "4")
+							if (tokens[0] == name.name)
 							{
-								system("cls");
-								teacherMenu();
-								return true;
+								if (tokens[4] == "4")
+								{
+									system("cls");
+									teacherMenu();
+									return true;
+								}
 							}
 						}
 					}
@@ -122,7 +125,7 @@ void displayTeachersForTeams()
 	string line, tokens[7], help;
 
 	cout << "\n                          _________________________________________________________________" << endl;
-	cout << "                                              Names:" << endl << endl;
+	cout << "                                              Names:         Surnames:" << endl << endl;
 
 	if (myFile.is_open())
 	{
@@ -141,7 +144,7 @@ void displayTeachersForTeams()
 				{
 					help.erase(0, 1);
 				}
-				cout << "                                Account:    " << tokens[0] << endl << endl;
+				cout << "                                Account:    " << tokens[0] << "        " << tokens[1] << endl << endl;
 			}
 		}
 	}

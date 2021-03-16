@@ -9,7 +9,7 @@
 
 using namespace std;
 
-bool checkAccAdminId(STUDENT& username, STUDENT& password)
+bool checkAccAdminId(STUDENT& name, STUDENT& surname, STUDENT& password)
 {
 	ifstream myFile("admin.txt");
 	string line, tokens[10], help;
@@ -32,17 +32,20 @@ bool checkAccAdminId(STUDENT& username, STUDENT& password)
 					help.erase(0, 1);
 				}
 
-				if (username.name == tokens[0])
+				if (name.name == tokens[0])
 				{
-					if (password.password == tokens[2])
+					if (surname.surname == tokens[1])
 					{
-						if (tokens[0] == username.name)
+						if (password.password == tokens[2])
 						{
-							if (tokens[4] == "5")
+							if (tokens[0] == name.name)
 							{
-								system("cls");
-								adminMenu();
-								return true;
+								if (tokens[4] == "5")
+								{
+									system("cls");
+									adminMenu();
+									return true;
+								}
 							}
 						}
 					}
